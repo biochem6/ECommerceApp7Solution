@@ -1,0 +1,44 @@
+﻿@using ECommerceApp7.Models
+@using Microsoft.AspNet.Identity
+@model IEnumerable<ECommerceApp7.Models.Item>
+
+@{
+    ViewBag.Title = "Category";
+}
+
+<h2>Category</h2>
+
+<table>
+@foreach (var item in Model) {
+    
+    <tr>
+        <td>
+            <img width="275" src=@("../../Images/" + item.ImageReference) alt="" />
+        </td>
+        
+    </tr>  
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+       
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.ActionLink("Add To Cart", "Cart", "Store", new { @User = User.Identity.GetUserId(), @itemId = item.ItemId }, null)
+        </td>
+    </tr>
+
+}
+
+</table>

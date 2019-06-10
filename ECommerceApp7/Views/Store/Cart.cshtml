@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ECommerceApp7.Models.Item>
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Your Shopping Cart</h2>
+
+<table class="table">
+  
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsOnSale)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalePercent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkuNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageReference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryId)
+        </td>
+        <td>
+            @Html.ActionLink("Change Quantity", "ChangeQuantity", new { id=item.ItemId }) 
+            @Html.ActionLink("Remove", "RemoveFromCart", new { id=item.ItemId })
+        </td>
+    </tr>
+}
+
+</table>

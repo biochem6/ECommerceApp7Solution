@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ECommerceApp7.Models.Item>
+
+@{
+    ViewBag.Title = "Sale";
+}
+
+<h2>Sale Items</h2>
+
+<table class="table">
+   
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageReference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+    </tr>
+
+}
+
+</table>
