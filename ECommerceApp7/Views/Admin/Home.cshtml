@@ -1,0 +1,33 @@
+﻿@model ECommerceApp7.Models.Item
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2 class="jumbotron">Administrative Panel</h2>
+
+
+<div class="container home_container">
+    <div class="row  h-75">
+        <div class="crud_div col-md-4  h-75">
+            <h3 class="crud_title">Create</h3>
+            <a href="/Admin/CreateItem"><p class="crud_control">Add Product</p></a><br/>
+            <a href="/Admin/CreateCategory"><p class="crud_control">Add Category</p></a><br />
+            <a href="/Admin/CreateSubcategories"><p class="crud_control">Add Subcategory</p></a>
+        </div>
+        <div class="crud_div col-md-4  h-75">
+            <h3 class="crud_title">Update</h3>
+            <a href="/Admin/UpdateItem"><p class="crud_control">Update Product</p></a><br />
+            <a href="/Admin/UpdateCategory"><p class="crud_control">Update Category</p></a><br />
+            <a href="/Admin/UpdateSubcategories"><p class="crud_control">Update Subcategory</p></a>
+
+        </div>
+        <div class="crud_div col-md-4  h-75">
+            <h3 class="crud_title">Delete</h3>
+            <a href="/Admin/DeleteItem"><p class="crud_control">Delete Product</p></a><br />
+            <a href="/Admin/DeleteCategory"><p class="crud_control">Delete Category</p></a>
+        </div>
+    </div>
+</div>
+
+

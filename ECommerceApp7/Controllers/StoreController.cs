@@ -2,10 +2,8 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -32,12 +30,11 @@ namespace ECommerceApp7.Controllers
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
         }
 
-        private StoreContext db = new StoreContext();
 
         // GET: Store
         public ActionResult Index()
         {
-            return View(db.Items.ToList());
+            return View(ApplicationDbContext.Items.ToList());
         }
 
         // GET: Store/Details/5
@@ -47,7 +44,7 @@ namespace ECommerceApp7.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.Items.Find(id);
+            Item item = ApplicationDbContext.Items.Find(id);
             if (item == null)
             {
                 return HttpNotFound();
@@ -61,131 +58,121 @@ namespace ECommerceApp7.Controllers
             return View();
         }
 
-        // POST: Store/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemId,Name,IsOnSale,SalePercent,Description,SkuNumber,Price,ImageReference")] Item item)
+        public ActionResult Category(string categoryName)
         {
-            if (ModelState.IsValid)
-            {
-                db.Items.Add(item);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            Category getCategoryId = ApplicationDbContext.Categories?
+                                                    .First(i => i.CategoryName == categoryName);
 
-            return View(item);
-        }
 
-        // GET: Store/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Item item = db.Items.Find(id);
-            if (item == null)
-            {
-                return HttpNotFound();
-            }
-            return View(item);
-        }
+            IEnumerable<Item> getCategory = ApplicationDbContext.Items
+                                                                .Where(i => i.CategoryId == getCategoryId.CategoryId);
 
-        // POST: Store/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemId,Name,IsOnSale,SalePercent,Description,SkuNumber,Price,ImageReference")] Item item)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(item).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(item);
-        }
-
-        // GET: Store/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Item item = db.Items.Find(id);
-            if (item == null)
-            {
-                return HttpNotFound();
-            }
-            return View(item);
-        }
-
-        // POST: Store/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Item item = db.Items.Find(id);
-            db.Items.Remove(item);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Category(int id)
-        {
-            IEnumerable<Item> getCategory = db.Items.Where(i => i.CategoryId == id);
 
             return View(getCategory);
         }
 
+
         public ActionResult Sale()
         {
-            IEnumerable<Item> getSaleItems = db.Items.Where(i => i.IsOnSale == true);
+            IEnumerable<Item> getSaleItems = ApplicationDbContext.Items.Where(i => i.IsOnSale == true);
 
             return View(getSaleItems);
         }
 
 
-        public ActionResult Cart()
-        {
-            return View();
-        }
-
-        //Add to Cart for logged in user
         [HttpPost]
-        [Authorize]
-        public ActionResult Cart(string user, int itemId)
+        public ActionResult AddItemToCart(int id)
         {
-
-            IQueryable<Item> itemAdded = db.Items.Where(i => i.ItemId == itemId);
-
-            var userId = User.Identity.GetUserId();
+            string userId = User.Identity.GetUserId();
             ApplicationUser currentUser = ApplicationDbContext.Users.FirstOrDefault(i => i.Id == userId);
 
 
-            string itemName = itemAdded.Where(i => i.ItemId == itemId).Select(j => j.Name).ToString();
-    
-            string itemCategory = itemAdded.Select(i => i.Categories.Where(j => j.CategoryId == i.CategoryId).Select(k => k.CategoryName)).ToString();
+            List<string> itemName = ApplicationDbContext.Items
+                .Where(i => i.ItemId == id)
+                .Select(i => i.Name).ToList();
 
-            int skuNumber = itemAdded.Where(i => i.ItemId == itemId).Select(j => j.SkuNumber).FirstOrDefault();
+            int categoryId = ApplicationDbContext.Items
+                .Where(i => i.ItemId == id)
+                .Select(i => i.CategoryId)
+                .FirstOrDefault();
 
-            decimal itemPrice = itemAdded.Where(i => i.ItemId == itemId).Select(j => j.Price).FirstOrDefault();
+            List<string> itemCategory = ApplicationDbContext.Categories
+                .Where(i => i.CategoryId == categoryId)
+                .Select(i => i.CategoryName).ToList();
 
-            int categoryId = itemAdded.Where(i => i.ItemId == itemId).Select(j => j.CategoryId).FirstOrDefault();
+
+            decimal itemPrice = ApplicationDbContext.Items
+                .Where(i => i.ItemId == id)
+                .Select(j => j.Price)
+                .FirstOrDefault();
+
 
             DateTime timeAdded = DateTime.Now;
 
-            IList<Cart> newCart = new List<Cart>() { new Cart() { UserId = currentUser, CategoryName = itemCategory, ItemName = itemName, SkuNumber = skuNumber, DateAdded = timeAdded, Price = itemPrice, ItemQuantity = 1, CategoryId = categoryId} };
-            db.Carts.AddRange(newCart);
-            db.SaveChanges();
 
-            return View();
+            //If user is logged in the cart will be saved in user's cart db as well as in session.
+            if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                var newCart = new Cart
+                {
+                    UserId = currentUser,
+                    CategoryName = itemCategory[0],
+                    ItemName = itemName[0],
+                    DateAdded = timeAdded,
+                    Price = itemPrice,
+                    ItemQuantity = 1,
+                    CategoryId = categoryId
+
+                };
+
+                ApplicationDbContext.Carts.Add(newCart);
+                ApplicationDbContext.SaveChanges();
+
+                return null;
+            }
+
+            if (Session["cart"] == null)
+            {
+
+                List<Cart> cart = new List<Cart>
+                {
+                    new Cart
+                    {
+                        UserId = currentUser,
+                        CategoryName = itemCategory[0],
+                        ItemName = itemName[0],
+                        DateAdded = timeAdded,
+                        Price = itemPrice,
+                        ItemQuantity = 1,
+                        CategoryId = categoryId
+                    }
+                };
+                Session["cart"] = cart;
+            }
+
+            return null;
+        }
+
+        public ActionResult Cart()
+        {
+            string userId = User.Identity.GetUserId();
+
+            IQueryable<Cart> cart = ApplicationDbContext.Carts
+                                           .Where(i => i.UserId.Id == userId);
+            return View(cart);
+        }
 
 
+        public ActionResult Search(string searchTerm)
+        {
+            if (searchTerm == null)
+            {
+                return null;
+            }
+
+            IQueryable<Item> searchItems = ApplicationDbContext.Items.Where(i => i.Name.Contains(searchTerm));
+
+            return View(searchItems);
         }
 
 
@@ -193,7 +180,7 @@ namespace ECommerceApp7.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                ApplicationDbContext.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -1,0 +1,41 @@
+﻿
+@model ECommerceApp7.ViewModels.SelectCategoryToDeleteViewModel
+
+@{
+    ViewBag.Title = "Delete Category";
+}
+<div class="jumbotron">
+    <h2 class="admin-pages-title">Delete Category</h2>
+    <h4 style="color: red"  class="admin-delete-warning">Warning: Deleting a category will delete all items and subcategories associated with the category.</h4>
+</div>
+
+
+    @foreach (var cat in Model.Categories)
+    {
+        using (Html.BeginForm("DeleteCategory", "Admin", new { categoryId = @cat.CategoryId }, FormMethod.Post))
+        {
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 admin-column">@Html.Label("Category Name: ")</div>
+                <div class="col-sm-2 admin-column">@Html.DisplayFor(model => cat.CategoryName)</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 admin-column">@Html.Label("Filter Button Name: ")</div>
+                <div class="col-sm-2 admin-column">@Html.DisplayFor(model => cat.FilterButtonName)</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="submit" id="deletecat" class="btn btn-danger admin-submit">Delete</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <hr />
+                </div>
+            </div>
+        </div>
+        }
+        
+    }
+
+@Html.Partial("_BackButtonPartial")

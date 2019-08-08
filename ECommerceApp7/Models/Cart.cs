@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 
 namespace ECommerceApp7.Models
@@ -23,8 +24,9 @@ namespace ECommerceApp7.Models
 
         public int CategoryId { get; set; }
 
-        public DateTime DateAdded { get; set; }
+        public DateTime DateAdded { get; set; }     
 
+        
 
     }
 }

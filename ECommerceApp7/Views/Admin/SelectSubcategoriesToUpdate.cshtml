@@ -1,0 +1,91 @@
+﻿@model ECommerceApp7.ViewModels.SelectSubcategoryToUpdateViewModel
+@{
+    ViewBag.Title = "SelectSubcategoryToUpdate";
+    List<string> catName = new List<string>();
+    foreach (var category in Model.CategoryList)
+    {
+        catName.Add(category.CategoryName);
+    }
+}
+
+<h2>Select Subcategory To Update</h2>
+
+@using (Html.BeginForm("GetUpdateSubcategories", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <p>Select Category: </p>
+            </div>
+            <div class="col-md">
+                @Html.DropDownList("SelectNewCategory", new SelectList(catName), "", new { @class = "form-control", @id = "SelectNewCategory" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <p id="category_selected">Select Subcategory: </p>
+            </div>
+            <div class="col-md" id="subcat">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+
+        </div>
+    </div>
+
+}
+@Html.Partial("_BackButtonPartial")
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#SelectNewCategory").change((e) => {
+
+                $("#subcat").empty();
+
+                const categorySelected = document.getElementById("SelectNewCategory");
+                const categoryValue = categorySelected.options[categorySelected.selectedIndex].text;
+
+                $("#category").val(categoryValue);
+
+                categorySelected.selectedIndex = 0;
+
+                if (categoryValue !== "") {
+                    const url = "/api/GetSubCategories/?categoryName=" + categoryValue;
+                    $.get(url,
+                        function (data) {
+                            data.forEach(function (element) {
+                                const node = document.createElement("INPUT"); // Create a input node
+                                node.setAttribute("type", "radio");
+                                node.setAttribute("name", "SubcategoryId");
+                                node.setAttribute("class", "check");
+                                node.setAttribute("value", element.key);
+                                node.setAttribute("id", element.value);
+
+                                const label = document.createElement("label");
+                                label.htmlFor = element.value;
+                                label.appendChild(document.createTextNode(element.value));
+
+
+                                const br = document.createElement("BR");
+
+                                document.getElementById("subcat").appendChild(node); // Append to div
+                                document.getElementById("subcat").appendChild(label);
+                                document.getElementById("subcat").appendChild(br);
+                            });
+
+                        });
+                }
+            });
+        })
+    </script>
+}

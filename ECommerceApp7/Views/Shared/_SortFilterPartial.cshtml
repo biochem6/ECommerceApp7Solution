@@ -1,0 +1,34 @@
+﻿@{
+    var f = ViewBag.filter;
+}
+
+
+<div class="sortFilterBar">
+    <div class="dropdown">
+        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort
+        </a>
+        <div class="dropdown-menu">
+            <ul class="list-group">
+                <li>Popularity</li>
+                <li>Alphabetically</li>
+                <li>Price High-to-Low</li>
+                <li>Price Low-to-High</li>
+            </ul>
+        </div>
+    </div>
+    <div class="dropdown">
+        @*<a class="nav-link dropdown-toggle"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @f.title
+        </a>
+        <div class="dropdown-menu">
+            <ul class="list-group">
+                @foreach (var m in ViewBag.filter)
+                {
+                   <li>m.filter</li>
+                }
+            </ul>
+        </div>*@
+    </div>
+    
+</div>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ECommerceApp7.Models.Category>
+
+@{
+    ViewBag.Title = "UpdateCategory";
+    var subcat = ViewBag.subCategories;
+}
+
+<h2>UpdateCategory</h2>
+
+
+
+@foreach (var cat in Model)
+{
+    using (Html.BeginForm("GetUpdateCategory", "Admin", new { categoryId = cat.CategoryId }, FormMethod.Post))
+    {
+        <div class="form-group container">
+            <div class="row">
+                <div class="col-2">
+                    <h6>Category Name</h6>
+                </div>
+                <div class="col-2">
+                    @Html.DisplayFor(model => cat.CategoryName, new { htmlAttributes = new { @class = "" } })
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-primary">Edit</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    <h6>Filter Button Name</h6>
+                </div>
+                <div class="col-2">
+                    @Html.DisplayFor(model => cat.FilterButtonName, new { htmlAttributes = new { @class = "" } })
+                </div>
+            </div>
+        </div>
+    }
+
+}
+@Html.Partial("_BackButtonPartial")
+

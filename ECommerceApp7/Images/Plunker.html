@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://plnkr.co/edit/K5VCArHCCMp6md3R6EPn?p=preview -->
+<html id="ng-app" ng-app="plunker.editorPage" lang="en" xmlns:ng="http://angularjs.org" class="ng-app:plunker.editorPage ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Plunker is an online community for creating, collaborating on and sharing your web development ideas."><meta name="keywords" content="jquery,angular.js,editor,online,jsfiddle,codepen,pastebin,testing,javascript testing,css testing,javascript,css,coffeescript,preview,live preview"><meta name="fragment" content="!"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@plnkrco"><meta name="twitter:title" ng-non-bindable="" content="Creating a Data-bound Component - Angular 2 Practice Exercise"><meta name="twitter:description" ng-non-bindable="" ,content="Created on Plnkr: Helping developers build the web."><meta name="twitter:image" ng-non-bindable="" ,content="//shot.plnkr.co/K5VCArHCCMp6md3R6EPn.png?d=2016-11-02T03:04:54.504Z"><link rel="alternate" type="application/json+oembed" ng-non-bindable="" href="https://plnkr.co/api/oembed?url=https%3A%2F%2Fplnkr.co%2Fedit%2FK5VCArHCCMp6md3R6EPn%2F&amp;format=json" title="Creating a Data-bound Component - Angular 2 Practice Exercise"><!--<base href="/edit/">--><base href="."><title>Plunker</title><link rel="stylesheet" href="./Plunker_files/editor-1.23.1.css"><!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!--[if lte IE 8]><script>document.createElement('ng-include');
+document.createElement('ng-pluralize');
+document.createElement('ng-view');
+document.createElement('ng:include');
+document.createElement('ng:pluralize');
+document.createElement('ng:view');</script><![endif]--><!--[if lt IE 8]><script src="/vendor/json2/json2.js"></script><![endif]--><script async="" src="./Plunker_files/gtm.js.download"></script><script async="" src="./Plunker_files/analytics.js.download"></script><script type="text/javascript" async="" src="./Plunker_files/ga.js.download"></script><script src="./Plunker_files/jquery.min.js.download"></script><!-- script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js")--><script><!--
+
+(function (root) {
+/* -- Data -- */
+root._plunker || (root._plunker = {});
+root._plunker.url = {"www":"\u002F\u002Fplnkr.co","collab":"\u002F\u002Fcollab.plnkr.co","api":"\u002F\u002Fapi.plnkr.co","api2":"https:\u002F\u002Fapi.plnkr.co\u002Fv2","embed":"\u002F\u002Fembed.plnkr.co","run":"\u002F\u002Frun.plnkr.co","shot":"\u002F\u002Fshot.plnkr.co","carbonadsH":"\u002F\u002Fengine.carbonads.com\u002Fz\u002F32595\u002Fazcarbon_2_1_0_HORIZ","carbonadsV":"\u002F\u002Fengine.carbonads.com\u002Fz\u002F32595\u002Fazcarbon_2_1_0_VERT"};
+root._plunker.package = {"name":"plunker-legacy-www","subdomain":"plunker-legacy-www","domains":["plnkr.co","plunker.co"],"scripts":{"build":"NODE_ENV=production grunt build","docker:build":"docker build -t gcr.io\u002F$(gcloud config list project --format 'value(core.project)' 2\u003E \u002Fdev\u002Fnull)\u002F$(node -e 'var p=require(\".\u002Fpackage.json\");console.log(`${p.name}:${p.version}`)') .","docker:push":"docker push gcr.io\u002F$(gcloud config list project --format 'value(core.project)' 2\u003E \u002Fdev\u002Fnull)\u002F$(node -e 'var p=require(\".\u002Fpackage.json\");console.log(`${p.name}:${p.version}`)')","git:release":"git add package.json .\u002Fk8s\u002F$(node -p 'require(\".\u002Fpackage.json\").name')-deploy.yaml && git commit -m \"$(node -e 'var p=require(\".\u002Fpackage.json\");console.log(`${p.name}@${p.version}`)')\" && git tag -m $(node -p 'require(\".\u002Fpackage.json\").version') $(node -p 'require(\".\u002Fpackage.json\").version')","k8s:update":"sed -i '' \"s~\\(image: gcr\\.io\u002Fplunker-api\u002F$(node -p 'require(\".\u002Fpackage.json\").name')\\):.*\\$~\\1:$(node -p 'require(\".\u002Fpackage.json\").version')~;s~\\(kubernetes\\.io\u002Fchange-cause: \\).*\\$~\\1'$(node -p 'require(\".\u002Fpackage.json\").version')'~\" .\u002Fk8s\u002F$(node -p 'require(\".\u002Fpackage.json\").name')-deploy.yaml","k8s:release":"kubectl apply -f .\u002Fk8s && kubectl annotate deployment\u002F$(node -p 'require(\".\u002Fpackage.json\").name') \"kubernetes.io\u002Fchange-cause=$(node -p 'require(\".\u002Fpackage.json\").version')\" && kubectl rollout status deployment\u002F$(node -p 'require(\".\u002Fpackage.json\").name')","start":"node server.js","postversion":"grunt build && npm run docker:build && npm run docker:push && npm run k8s:update && npm run k8s:release && npm run git:release"},"engines":{"node":"4.8.x","npm":"2.x"},"version":"1.23.1","private":true,"description":"The code powering the public facing component of http:\u002F\u002Fplnkr.co","main":"server.js","dependencies":{"JSONStream":"0.4.x","ace":"git:\u002F\u002Fgithub.com\u002Fajaxorg\u002Face#v1.2.2","amd-loader":"0.0.5","authom":"^0.4.36","bluebird":"^2.2.2","bluebird-lru-cache":"^0.1.0","body-parser":"^1.5.2","coffee-script":"^1.10.0","compression":"^1.0.9","concat-stream":"^1.4.6","connect-assets":"^5.2.1","cookie-parser":"^1.3.2","cors":"^2.8.4","errorhandler":"^1.1.1","event-stream":"3.0.x","express":"^4.7.2","express-state":"^1.2.0","forever-monitor":"^1.2.3","fs-extra":"^0.30.0","hbs":"~2.4.0","jade":"^0.35.0","less":"^1.7.5","mime":"~1.2.7","morgan":"^1.2.2","morph":"^0.2.0","nconf":"~0.6.4","prerender-node":"~1.0.0","request":"^2.83.0","secure-filters":"~1.0.4","serve-static":"^1.10.0","xmlbuilder":"0.4.x"},"devDependencies":{"brfs":"0.0.8","browserify":"~2.35.4","caching-coffeeify":"~0.3.0","coffee-script":"~1.6.3","csswring":"^5.0.0","grunt":"~0.4.2","grunt-browserify":"~1.2.11","grunt-bump":"0.0.11","grunt-cli":"^0.1.13","grunt-contrib-less":"^1.1.0","grunt-contrib-uglify":"^1.0.1","grunt-contrib-watch":"~0.5.3","grunt-exec":"~0.4.5","grunt-lib-contrib":"~0.6.1","less":"~1.3.3","postcss":"^5.0.21","rimraf":"~2.2.2","uglify-js":"^2.6.2"},"repository":{"type":"git","url":"https:\u002F\u002Fgithub.com\u002Ffilearts\u002Fplunker_www.git"},"keywords":["plunker","plnkr"],"author":"Geoff Goodman","license":"MIT"};
+root._plunker.bootstrap = null;
+root._plunker.session = {"keychain":[{}],"public_id":"6p0ECWsrdomft53IqmAFVRoFa52ygJRL","last_access":"2019-08-01T17:07:20.311Z","url":"\u002F\u002Fapi.plnkr.co\u002Fsessions\u002F5d431c489ae887000c43e2df","user_url":"\u002F\u002Fapi.plnkr.co\u002Fsessions\u002F5d431c489ae887000c43e2df\u002Fuser","age":3,"id":"5d431c489ae887000c43e2df"};
+}(this));
+
+-->
+</script><script src="./Plunker_files/editor-1.23.1.js.download"></script><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none !important;}ng\:form{display:block;}</style><style id="ace_editor.css">.ace_editor {position: relative;overflow: hidden;font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;direction: ltr;}.ace_scroller {position: absolute;overflow: hidden;top: 0;bottom: 0;background-color: inherit;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;cursor: text;}.ace_content {position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;min-width: 100%;}.ace_dragging .ace_scroller:before{position: absolute;top: 0;left: 0;right: 0;bottom: 0;content: '';background: rgba(250, 250, 250, 0.01);z-index: 1000;}.ace_dragging.ace_dark .ace_scroller:before{background: rgba(0, 0, 0, 0.01);}.ace_selecting, .ace_selecting * {cursor: text !important;}.ace_gutter {position: absolute;overflow : hidden;width: auto;top: 0;bottom: 0;left: 0;cursor: default;z-index: 4;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_gutter-active-line {position: absolute;left: 0;right: 0;}.ace_scroller.ace_scroll-left {box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;}.ace_gutter-cell {padding-left: 19px;padding-right: 6px;background-repeat: no-repeat;}.ace_gutter-cell.ace_error {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: 2px center;}.ace_gutter-cell.ace_warning {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");background-position: 2px center;}.ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");background-position: 2px center;}.ace_dark .ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");}.ace_scrollbar {position: absolute;right: 0;bottom: 0;z-index: 6;}.ace_scrollbar-inner {position: absolute;cursor: text;left: 0;top: 0;}.ace_scrollbar-v{overflow-x: hidden;overflow-y: scroll;top: 0;}.ace_scrollbar-h {overflow-x: scroll;overflow-y: hidden;left: 0;}.ace_print-margin {position: absolute;height: 100%;}.ace_text-input {position: absolute;z-index: 0;width: 0.5em;height: 1em;opacity: 0;background: transparent;-moz-appearance: none;appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;text-indent: -1em;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;}.ace_text-input.ace_composition {background: inherit;color: inherit;z-index: 1000;opacity: 1;text-indent: 0;}.ace_layer {z-index: 1;position: absolute;overflow: hidden;word-wrap: normal;white-space: pre;height: 100%;width: 100%;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;pointer-events: none;}.ace_gutter-layer {position: relative;width: auto;text-align: right;pointer-events: auto;}.ace_text-layer {font: inherit !important;}.ace_cjk {display: inline-block;text-align: center;}.ace_cursor-layer {z-index: 4;}.ace_cursor {z-index: 4;position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;border-left: 2px solid}.ace_slim-cursors .ace_cursor {border-left-width: 1px;}.ace_overwrite-cursors .ace_cursor {border-left-width: 0;border-bottom: 1px solid;}.ace_hidden-cursors .ace_cursor {opacity: 0.2;}.ace_smooth-blinking .ace_cursor {-webkit-transition: opacity 0.18s;transition: opacity 0.18s;}.ace_editor.ace_multiselect .ace_cursor {border-left-width: 1px;}.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {position: absolute;z-index: 3;}.ace_marker-layer .ace_selection {position: absolute;z-index: 5;}.ace_marker-layer .ace_bracket {position: absolute;z-index: 6;}.ace_marker-layer .ace_active-line {position: absolute;z-index: 2;}.ace_marker-layer .ace_selected-word {position: absolute;z-index: 4;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}.ace_line .ace_fold {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;display: inline-block;height: 11px;margin-top: -2px;vertical-align: middle;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");background-repeat: no-repeat, repeat-x;background-position: center center, top left;color: transparent;border: 1px solid black;border-radius: 2px;cursor: pointer;pointer-events: auto;}.ace_dark .ace_fold {}.ace_fold:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");}.ace_tooltip {background-color: #FFF;background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));border: 1px solid gray;border-radius: 1px;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);color: black;max-width: 100%;padding: 3px 4px;position: fixed;z-index: 999999;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: default;white-space: pre;word-wrap: break-word;line-height: normal;font-style: normal;font-weight: normal;letter-spacing: normal;pointer-events: none;}.ace_folding-enabled > .ace_gutter-cell {padding-right: 13px;}.ace_fold-widget {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;margin: 0 -12px 0 1px;display: none;width: 11px;vertical-align: top;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: center;border-radius: 3px;border: 1px solid transparent;cursor: pointer;}.ace_folding-enabled .ace_fold-widget {display: inline-block;   }.ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");}.ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");}.ace_fold-widget:hover {border: 1px solid rgba(0, 0, 0, 0.3);background-color: rgba(255, 255, 255, 0.2);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);}.ace_fold-widget:active {border: 1px solid rgba(0, 0, 0, 0.4);background-color: rgba(0, 0, 0, 0.05);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);}.ace_dark .ace_fold-widget {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");}.ace_dark .ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget:hover {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);background-color: rgba(255, 255, 255, 0.1);}.ace_dark .ace_fold-widget:active {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);}.ace_fold-widget.ace_invalid {background-color: #FFB4B4;border-color: #DE5555;}.ace_fade-fold-widgets .ace_fold-widget {-webkit-transition: opacity 0.4s ease 0.05s;transition: opacity 0.4s ease 0.05s;opacity: 0;}.ace_fade-fold-widgets:hover .ace_fold-widget {-webkit-transition: opacity 0.05s ease 0.05s;transition: opacity 0.05s ease 0.05s;opacity:1;}.ace_underline {text-decoration: underline;}.ace_bold {font-weight: bold;}.ace_nobold .ace_bold {font-weight: normal;}.ace_italic {font-style: italic;}.ace_error-marker {background-color: rgba(255, 0, 0,0.2);position: absolute;z-index: 9;}.ace_highlight-marker {background-color: rgba(255, 255, 0,0.2);position: absolute;z-index: 8;}</style><style id="ace-tm">.ace-tm .ace_gutter {background: #f0f0f0;color: #333;}.ace-tm .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-tm .ace_fold {background-color: #6B72E6;}.ace-tm {background-color: #FFFFFF;color: black;}.ace-tm .ace_cursor {color: black;}.ace-tm .ace_invisible {color: rgb(191, 191, 191);}.ace-tm .ace_storage,.ace-tm .ace_keyword {color: blue;}.ace-tm .ace_constant {color: rgb(197, 6, 11);}.ace-tm .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-tm .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-tm .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-tm .ace_invalid {background-color: rgba(255, 0, 0, 0.1);color: red;}.ace-tm .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-tm .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-tm .ace_support.ace_type,.ace-tm .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-tm .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-tm .ace_string {color: rgb(3, 106, 7);}.ace-tm .ace_comment {color: rgb(76, 136, 107);}.ace-tm .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-tm .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-tm .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-tm .ace_variable {color: rgb(49, 132, 149);}.ace-tm .ace_xml-pe {color: rgb(104, 104, 91);}.ace-tm .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-tm .ace_heading {color: rgb(12, 7, 255);}.ace-tm .ace_list {color:rgb(185, 6, 144);}.ace-tm .ace_meta.ace_tag {color:rgb(0, 22, 142);}.ace-tm .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-tm .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-tm.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;border-radius: 2px;}.ace-tm .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-tm .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-tm .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-tm .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-tm .ace_gutter-active-line {background-color : #dcdcdc;}.ace-tm .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-tm .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}</style><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style><style>.ace_snippet-marker {    -moz-box-sizing: border-box;    box-sizing: border-box;    background: rgba(194, 193, 208, 0.09);    border: 1px dotted rgba(211, 208, 235, 0.62);    position: absolute;}</style><style>.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {    background-color: #CAD6FA;    z-index: 1;}.ace_editor.ace_autocomplete .ace_line-hover {    border: 1px solid #abbffe;    margin-top: -1px;    background: rgba(233,233,253,0.4);}.ace_editor.ace_autocomplete .ace_line-hover {    position: absolute;    z-index: 2;}.ace_editor.ace_autocomplete .ace_scroller {   background: none;   border: none;   box-shadow: none;}.ace_rightAlignedText {    color: gray;    display: inline-block;    position: absolute;    right: 4px;    text-align: right;    z-index: -1;}.ace_editor.ace_autocomplete .ace_completion-highlight{    color: #000;    text-shadow: 0 0 0.01em;}.ace_editor.ace_autocomplete {    width: 280px;    z-index: 200000;    background: #fbfbfb;    color: #444;    border: 1px lightgray solid;    position: fixed;    box-shadow: 2px 3px 5px rgba(0,0,0,.2);    line-height: 1.4;}</style><style id="ace_searchbox">.ace_search {background-color: #ddd;border: 1px solid #cbcbcb;border-top: 0 none;max-width: 325px;overflow: hidden;margin: 0;padding: 4px;padding-right: 6px;padding-bottom: 0;position: absolute;top: 0px;z-index: 99;white-space: normal;}.ace_search.left {border-left: 0 none;border-radius: 0px 0px 5px 0px;left: 0;}.ace_search.right {border-radius: 0px 0px 0px 5px;border-right: 0 none;right: 0;}.ace_search_form, .ace_replace_form {border-radius: 3px;border: 1px solid #cbcbcb;float: left;margin-bottom: 4px;overflow: hidden;}.ace_search_form.ace_nomatch {outline: 1px solid red;}.ace_search_field {background-color: white;border-right: 1px solid #cbcbcb;border: 0 none;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;float: left;height: 22px;outline: 0;padding: 0 7px;width: 214px;margin: 0;}.ace_searchbtn,.ace_replacebtn {background: #fff;border: 0 none;border-left: 1px solid #dcdcdc;cursor: pointer;float: left;height: 22px;margin: 0;padding: 0;position: relative;}.ace_searchbtn:last-child,.ace_replacebtn:last-child {border-top-right-radius: 3px;border-bottom-right-radius: 3px;}.ace_searchbtn:disabled {background: none;cursor: default;}.ace_searchbtn {background-position: 50% 50%;background-repeat: no-repeat;width: 27px;}.ace_searchbtn.prev {background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAYAAAB4ka1VAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADFJREFUeNpiSU1NZUAC/6E0I0yACYskCpsJiySKIiY0SUZk40FyTEgCjGgKwTRAgAEAQJUIPCE+qfkAAAAASUVORK5CYII=);    }.ace_searchbtn.next {background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAYAAAB4ka1VAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADRJREFUeNpiTE1NZQCC/0DMyIAKwGJMUAYDEo3M/s+EpvM/mkKwCQxYjIeLMaELoLMBAgwAU7UJObTKsvAAAAAASUVORK5CYII=);    }.ace_searchbtn_close {background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAcCAYAAABRVo5BAAAAZ0lEQVR42u2SUQrAMAhDvazn8OjZBilCkYVVxiis8H4CT0VrAJb4WHT3C5xU2a2IQZXJjiQIRMdkEoJ5Q2yMqpfDIo+XY4k6h+YXOyKqTIj5REaxloNAd0xiKmAtsTHqW8sR2W5f7gCu5nWFUpVjZwAAAABJRU5ErkJggg==) no-repeat 50% 0;border-radius: 50%;border: 0 none;color: #656565;cursor: pointer;float: right;font: 16px/16px Arial;height: 14px;margin: 5px 1px 9px 5px;padding: 0;text-align: center;width: 14px;}.ace_searchbtn_close:hover {background-color: #656565;background-position: 50% 100%;color: white;}.ace_replacebtn.prev {width: 54px}.ace_replacebtn.next {width: 27px}.ace_button {margin-left: 2px;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-o-user-select: none;-ms-user-select: none;user-select: none;overflow: hidden;opacity: 0.7;border: 1px solid rgba(100,100,100,0.23);padding: 1px;-moz-box-sizing: border-box;box-sizing:    border-box;color: black;}.ace_button:hover {background-color: #eee;opacity:1;}.ace_button:active {background-color: #ddd;}.ace_button.checked {border-color: #3399ff;opacity:1;}.ace_search_options{margin-bottom: 3px;text-align: right;-webkit-user-select: none;-moz-user-select: none;-o-user-select: none;-ms-user-select: none;user-select: none;}</style><script>var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-28928507-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-28928507-5', 'plnkr.co');
+ga('set', 'dimension1', 'legacy');
+
+</script><script src="./Plunker_files/ext-emmet.js.download"></script><script src="./Plunker_files/emmet.js.download"></script><script src="./Plunker_files/embed.js.download"></script><script src="./Plunker_files/text.js.download"></script><script src="./Plunker_files/mode-html.js.download"></script><script src="./Plunker_files/html.js.download"></script><script src="./Plunker_files/mode-markdown.js.download"></script><script src="./Plunker_files/mode-typescript.js.download"></script><script src="./Plunker_files/mode-json.js.download"></script><script src="./Plunker_files/typescript.js.download"></script><script src="./Plunker_files/css.js.download"></script></head><body class="editor" style="cursor: auto;"><div ng-show="overlay.message" class="overlay" style="display: none;">
+  <p class="message ng-binding" ng-bind="overlay.message"></p>
+</div><div class="plunker-version-switcher" path="/edit">
+    <div>
+        <button type="button" class="close" aria-label="close" ng-click="$ctrl.onClickClose($event)">
+            <span aria-hidden="true">×</span>
+  </button>
+        💥Plunker is getting a big upgrade💥
+        <a ng-href="https://next.plnkr.co/edit/K5VCArHCCMp6md3R6EPn?p=preview" ng-click="$ctrl.onClickTry($event)" title="Don&#39;t worry, you can easily switch back" href="https://next.plnkr.co/edit/K5VCArHCCMp6md3R6EPn?p=preview">Click here to try it out</a>
+    </div>
+</div><nav class="navbar"><div class="navbar-inner"><div class="container-fluid"><a href="https://plnkr.co/" class="brand"><span class="brandname">Plunker<sub ng-bind-template="v1.23.1" class="version ng-binding">v1.23.1</sub></span></a><div class="plunker-userpanel pull-right" ng-switch="" on="visitor.logged_in">
+  <!-- ngSwitchWhen: true -->
+  <!-- ngSwitchWhen: false -->
+<button ng-switch-when="false" ng-disabled="visitor.isLoading()" class="user-login btn btn-primary ng-scope" tooltip="Sign in to get full access" tooltip-placement="bottom" ng-click="visitor.login()">
+    <i class="icon-github"></i>
+    <span class="text shrink">Sign in with Github</span>
+  </button></div>
+<div class="plunker-toolbar btn-toolbar">
+  <div class="btn-group" ng-show="session.isPlunkDirty() &amp;&amp; (!session.plunk || session.plunk.isWritable())" style="display: none;">
+    <button ng-click="session.save() | trackEvent:&#39;Plunk&#39;:&#39;Save&#39;:&#39;Toolbar&#39;" class="btn btn-primary ng-scope" tooltip-placement="bottom" tooltip="Save your work as a new Plunk">
+      <i class="icon-save"></i><span class="shrink"> Save</span>
+    </button>
+  </div>
+  <div class="btn-group" ng-show="!session.isPlunkDirty() &amp;&amp; (!session.plunk || session.plunk.isWritable())" style="display: none;">
+    <button ng-hide="session.plunk.frozen_version==session.plunk.history.length - 1 &amp;&amp; !session.currentRevisionIndex" ng-click="session.freeze() | trackEvent:&#39;Plunk&#39;:&#39;Freeze&#39;:&#39;Toolbar&#39;" class="btn btn-default ng-scope" tooltip-placement="bottom" tooltip="Set this version as the version other users will see. You can then keep saving new versions that only you can see." style="display: none;">
+      <i class="icon-lock"></i><span class="shrink"> Freeze</span>
+    </button>
+    <button ng-show="session.plunk.frozen_version==session.plunk.history.length - 1 &amp;&amp; !session.currentRevisionIndex" ng-click="session.unfreeze() | trackEvent:&#39;Plunk&#39;:&#39;Unfreeze&#39;:&#39;Toolbar&#39;" class="btn btn-default ng-scope" tooltip-placement="bottom" tooltip="Unfreeze this plunk so that no revisions are hidden from other users." style="">
+      <i class="icon-unlock"></i><span class="shrink"> Unfreeze</span>
+    </button>
+  </div>
+  <div class="btn-group" ng-show="session.isSaved()" style="">
+    <button ng-click="session.fork() | trackEvent:&#39;Plunk&#39;:&#39;Fork&#39;:&#39;Toolbar&#39;" class="btn ng-scope" tooltip-placement="bottom" tooltip="Save your changes as a fork of this Plunk">
+      <i class="icon-git-fork"></i><span class="shrink"> Fork</span>
+    </button>
+    <button ng-if="visitor.isMember()" data-toggle="dropdown" class="btn dropdown-toggle ng-scope" tooltip-placement="bottom" tooltip="Fork and toggle the privacy of this Plunk"><span class="caret"></span></button>
+    <ul ng-if="visitor.isMember()" class="dropdown-menu" ng-switch="" on="session.private">
+      <!-- ngSwitchWhen: false -->
+      <!-- ngSwitchWhen: true -->
+    <li ng-switch-when="true" class="ng-scope"><a ng-click="session.fork({private: false}) | trackEvent:&#39;Plunk&#39;:&#39;Fork Public&#39;:&#39;Toolbar&#39;">Fork to public plunk</a></li></ul>
+  </div>
+  <div ng-show="session.plunk.isWritable() &amp;&amp; session.plunk.isSaved()" class="btn-group" style="display: none;">
+    <button ng-click="promptDestroy() | trackEvent:&#39;Plunk&#39;:&#39;Destroy&#39;:&#39;Toolbar&#39;" class="btn btn-danger ng-scope" tooltip-placement="bottom" tooltip="Delete the current plunk">
+      <i class="icon-trash"></i>
+    </button>
+  </div>
+  <div class="btn-group">
+    <button ng-click="promptReset() | trackEvent:&#39;Plunk&#39;:&#39;Reset&#39;:&#39;Toolbar&#39;" class="btn btn-success ng-scope" tooltip-placement="bottom" tooltip="Create a new Plunk">
+      <i class="icon-file"></i><span class="shrink"> New</span>
+    </button>
+    <button data-toggle="dropdown" class="btn btn-success dropdown-toggle ng-scope" tooltip-placement="bottom" tooltip="Create a new Plunk from a template"><span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="https://plnkr.co/edit/gist:1986619">jQuery</a><a href="https://plnkr.co/edit/gist:1992850" class="coffee" title="In coffee-script"><img src="./Plunker_files/coffeescript-logo-small_med.png"></a></li>
+      <li><a href="https://plnkr.co/edit/gist:2006604">jQuery UI</a></li>
+      <li class="divider"></li>
+      <li class="dropdown-submenu">
+        <a tabindex="-1" href="https://plnkr.co/edit/#" title="Angular 1.x">AngularJS</a>
+        <ul class="dropdown-menu">
+          <li><a href="https://plnkr.co/edit/gist:3510140">1.0.x</a><a href="https://plnkr.co/edit/gist:3189582" class="coffee" title="In coffee-script"><img src="./Plunker_files/coffeescript-logo-small_med.png"></a></li>
+          <li><a href="https://plnkr.co/edit/gist:5301635">1.0.x + Jasmine</a></li>
+          <li class="divider"></li>
+          <li><a href="https://plnkr.co/edit/gist:3662702">1.1.x (unstable)</a><a href="https://plnkr.co/edit/gist:3662696" class="coffee" title="In coffee-script"><img src="./Plunker_files/coffeescript-logo-small_med.png"></a></li>
+          <li class="divider"></li>
+          <li><a href="https://plnkr.co/edit/tpl:FrTqqTNoY8BEfHs9bB0f">1.2.x</a><a href="https://plnkr.co/edit/tpl:9dz4TT6og6hHx9QAOBT3" class="coffee" title="In coffee-script"><img src="./Plunker_files/coffeescript-logo-small_med.png"></a></li>
+          <li class="divider"></li>
+          <li><a href="https://plnkr.co/edit/tpl:rfqcl9AHEoJZEEJxyNn2">1.3.x</a><a href="https://plnkr.co/edit/tpl:RJc8D4Z6KMf74ffWOTn5" class="coffee" title="In coffee-script"><img src="./Plunker_files/coffeescript-logo-small_med.png"></a></li>
+          <li class="divider"></li>
+          <li><a href="https://plnkr.co/edit/tpl:8rFfZljYNl3z1A4LKSL2">1.4.x</a><a href="https://plnkr.co/edit/tpl:zxQbqlOd9vSmkCLQm5ke" class="coffee" title="In coffee-script"><img src="./Plunker_files/coffeescript-logo-small_med.png"></a></li>
+          <li class="divider"></li>
+          <li><a href="https://plnkr.co/edit/tpl:CR2TtS1zz9wFGgsl5z2c">1.5.x</a></li>
+          <li><a href="https://plnkr.co/edit/tpl:qvZ8Iri6jRUioBEDsa32">1.5.x + Typescript</a></li>
+        </ul>
+      </li>
+      <li><a href="https://plnkr.co/edit/tpl:e5gDneScpWFRIwj48PEz" title="Just Angular">Angular</a></li>
+      <li class="divider"></li>
+      <li class="dropdown-submenu">
+        <a tabindex="-1" href="https://plnkr.co/edit/#">React.js</a>
+        <ul class="dropdown-menu">
+          <li><a href="https://plnkr.co/edit/tpl:a3vkhunC1Na5BG6GY2Gf">React.js</a></li>
+          <li><a href="https://plnkr.co/edit/tpl:wxQVHKHmyJVjcBJQsk6q">React.js with addons</a></li>
+        </ul>
+      </li>
+      <li class="divider"></li>
+      <li><a href="https://plnkr.co/edit/gist:2016721">Bootstrap</a><a href="https://plnkr.co/edit/gist:2016721" class="coffee" title="In coffee-script"><img src="./Plunker_files/coffeescript-logo-small_med.png"></a></li>
+      <li class="divider"></li>
+      <li><a href="https://plnkr.co/edit/gist:2050713">Backbone.js</a><a href="https://plnkr.co/edit/gist:2050746" class="coffee" title="In coffee-script"><img src="./Plunker_files/coffeescript-logo-small_med.png"></a></li>
+      <li class="divider"></li>
+      <li><a href="https://plnkr.co/edit/gist:3510115">YUI</a></li>
+      <li class="divider"></li>
+      <li><a href="https://plnkr.co/edit/tpl:ajm0hzObeid6Kb1aE1Ih">KendoUI</a></li>
+    </ul>
+  </div>
+  <div class="btn-group">
+    <button ng-click="togglePreview() | trackEvent:&#39;Multipane&#39;:panes.active.id==&#39;preview&#39;&amp;&amp;&#39;Show Preview&#39;||&#39;Hide Preview&#39;:&#39;Toolbar&#39;" class="btn btn-inverse ng-scope active" ng-class="{active: panes.active.id==&#39;preview&#39;}" ng-switch="" on="panes.active.id==&#39;preview&#39;" tooltip-placement="bottom" tooltip="Preview your work">
+      <!-- ngSwitchWhen: false -->
+      <!-- ngSwitchWhen: true -->
+    <div ng-switch-when="true" class="ng-scope">
+        <i class="icon-stop"></i>
+        <span class="shrink">Stop</span>
+      </div></button>
+  </div>
+  <div class="btn-group pull-right" ng-show="session.isSaved()" style="">
+    <a ng-href="//embed.plnkr.co/K5VCArHCCMp6md3R6EPn/" target="_blank" class="btn ng-scope" tooltip-placement="bottom" tooltip="Open the embedded view" href="https://embed.plnkr.co/K5VCArHCCMp6md3R6EPn/">
+      <i class="icon-external-link"></i>
+    </a>
+  </div>
+  <div class="btn-group pull-right">
+    <button ng-click="triggerDownload() | trackEvent:&#39;Plunk&#39;:&#39;Download Zip&#39;:&#39;Toolbar&#39;" class="btn ng-scope" tooltip-placement="bottom" tooltip="Download your Plunk as a zip file">
+      <i class="icon-download-alt"></i>
+    </button>
+  </div>
+  <div class="btn-group pull-right" ng-show="session.isSaved() &amp;&amp; visitor.isMember()" style="display: none;">
+    <button ng-click="toggleFavorite() | trackEvent:&#39;Plunk&#39;:&#39;Star&#39;:&#39;Toolbar&#39;" class="btn ng-scope" ng-class="{activated: session.plunk.thumbed, &#39;active&#39;: session.plunk.thumbed}" tooltip-placement="bottom" tooltip="Save this Plunk to your favorites">
+      <i class="icon-star"></i>
+    </button>
+  </div>
+  <div class="btn-group pull-right" ng-show="session.isSaved() &amp;&amp; visitor.isMember()" style="display: none;">
+    <button ng-click="toggleRemembered() | trackEvent:&#39;Plunk&#39;:session.plunk.remembered &amp;&amp; &#39;Remember&#39; || &#39;Forget&#39;:&#39;Toolbar&#39;" class="btn ng-scope" ng-class="{activated: session.plunk.remembered, &#39;active&#39;: session.plunk.remembered}" tooltip-placement="bottom" tooltip="Save this Plunk to your list of templates">
+      <i class="icon-briefcase"></i>
+    </button>
+  </div>
+  <div class="btn-group pull-right">
+    <button ng-click="beautifier.beautify() | trackEvent:&#39;Plunk&#39;:&#39;Beautify&#39;:&#39;Toolbar&#39;" class="btn ng-scope disabled" ng-class="{disabled: !beautifier.isBeautifiable()}" tooltip-placement="bottom" tooltip="Beautify your code">
+      <i class="icon-ok"></i>
+    </button>
+  </div>
+</div><!-- Top nav bar--><div class="nav"><ul id="navbar" class="nav"><!-- ngRepeat: (name, item) in menu.items --></ul></div></div></div></nav><div class="plunker-editor-layout ui-layout-container" style="overflow: hidden;">
+  <div class="ui-layout-west ui-layout-pane ui-layout-pane-west" style="position: absolute; margin: 0px; left: 0px; right: auto; top: 0px; bottom: 0px; height: 853px; z-index: 0; width: 250px; display: block; visibility: visible;">
+    <div class="plunker-sidebar">
+  <div class="plunker-sidebar-scroll">
+    <div class="alert alert-info plunker-restorer" ng-show="savedState" style="display: none;">
+  <p><strong>Unsaved session</strong> Restore your previous session?</p>
+  <button class="btn btn-success btn-mini" ng-click="restoreSession() | trackEvent:&#39;Plunk&#39;:&#39;Restore&#39;:&#39;Sidebar&#39;">Restore</button>
+  <button class="btn btn-danger btn-mini" data-dismiss="alert">Discard</button>
+</div>
+    <details open="">
+      <summary class="header">Files</summary>
+      <ul class="plunker-filelist nav nav-list">
+        <!-- ngRepeat: buffer in session.getBufferArray() | orderBy:'filename' --><li class="file ng-scope  dirty" ng-class="{active: active, dirty: dirty, changed: changed}" buffer="buffer" ng-repeat="buffer in session.getBufferArray() | orderBy:&#39;filename&#39;">
+  <ul class="participants">
+    <!-- ngRepeat: (id, participant) in buffer.participants -->
+  </ul>
+  <a class="filename ng-binding" ng-click="activateBuffer(buffer)" ng-dblclick="promptFileRename(buffer) | trackEvent:&#39;File&#39;:&#39;Rename&#39;:&#39;Sidebar&#39;">app/app.component.ts</a>
+  <ul class="file-ops">
+    <li class="delete">
+      <button ng-click="promptFileDelete(buffer) | trackEvent:&#39;File&#39;:&#39;Delete&#39;:&#39;Sidebar&#39;" class="btn btn-mini ng-scope" tooltip="Delete this file" tooltip-placement="right">
+        <i class="icon-remove"></i>
+      </button>
+    </li>
+  </ul>
+</li><li class="file ng-scope active dirty" ng-class="{active: active, dirty: dirty, changed: changed}" buffer="buffer" ng-repeat="buffer in session.getBufferArray() | orderBy:&#39;filename&#39;">
+  <ul class="participants">
+    <!-- ngRepeat: (id, participant) in buffer.participants -->
+  </ul>
+  <a class="filename ng-binding" ng-click="activateBuffer(buffer)" ng-dblclick="promptFileRename(buffer) | trackEvent:&#39;File&#39;:&#39;Rename&#39;:&#39;Sidebar&#39;">app/app.module.ts</a>
+  <ul class="file-ops">
+    <li class="delete">
+      <button ng-click="promptFileDelete(buffer) | trackEvent:&#39;File&#39;:&#39;Delete&#39;:&#39;Sidebar&#39;" class="btn btn-mini ng-scope" tooltip="Delete this file" tooltip-placement="right">
+        <i class="icon-remove"></i>
+      </button>
+    </li>
+  </ul>
+</li><li class="file ng-scope" ng-class="{active: active, dirty: dirty, changed: changed}" buffer="buffer" ng-repeat="buffer in session.getBufferArray() | orderBy:&#39;filename&#39;">
+  <ul class="participants">
+    <!-- ngRepeat: (id, participant) in buffer.participants -->
+  </ul>
+  <a class="filename ng-binding" ng-click="activateBuffer(buffer)" ng-dblclick="promptFileRename(buffer) | trackEvent:&#39;File&#39;:&#39;Rename&#39;:&#39;Sidebar&#39;">app/main.ts</a>
+  <ul class="file-ops">
+    <li class="delete">
+      <button ng-click="promptFileDelete(buffer) | trackEvent:&#39;File&#39;:&#39;Delete&#39;:&#39;Sidebar&#39;" class="btn btn-mini ng-scope" tooltip="Delete this file" tooltip-placement="right">
+        <i class="icon-remove"></i>
+      </button>
+    </li>
+  </ul>
+</li><li class="file ng-scope" ng-class="{active: active, dirty: dirty, changed: changed}" buffer="buffer" ng-repeat="buffer in session.getBufferArray() | orderBy:&#39;filename&#39;">
+  <ul class="participants">
+    <!-- ngRepeat: (id, participant) in buffer.participants -->
+  </ul>
+  <a class="filename ng-binding" ng-click="activateBuffer(buffer)" ng-dblclick="promptFileRename(buffer) | trackEvent:&#39;File&#39;:&#39;Rename&#39;:&#39;Sidebar&#39;">bootstrap.css</a>
+  <ul class="file-ops">
+    <li class="delete">
+      <button ng-click="promptFileDelete(buffer) | trackEvent:&#39;File&#39;:&#39;Delete&#39;:&#39;Sidebar&#39;" class="btn btn-mini ng-scope" tooltip="Delete this file" tooltip-placement="right">
+        <i class="icon-remove"></i>
+      </button>
+    </li>
+  </ul>
+</li><li class="file ng-scope" ng-class="{active: active, dirty: dirty, changed: changed}" buffer="buffer" ng-repeat="buffer in session.getBufferArray() | orderBy:&#39;filename&#39;">
+  <ul class="participants">
+    <!-- ngRepeat: (id, participant) in buffer.participants -->
+  </ul>
+  <a class="filename ng-binding" ng-click="activateBuffer(buffer)" ng-dblclick="promptFileRename(buffer) | trackEvent:&#39;File&#39;:&#39;Rename&#39;:&#39;Sidebar&#39;">index.html</a>
+  <ul class="file-ops">
+    <li class="delete">
+      <button ng-click="promptFileDelete(buffer) | trackEvent:&#39;File&#39;:&#39;Delete&#39;:&#39;Sidebar&#39;" class="btn btn-mini ng-scope" tooltip="Delete this file" tooltip-placement="right">
+        <i class="icon-remove"></i>
+      </button>
+    </li>
+  </ul>
+</li><li class="file ng-scope  dirty" ng-class="{active: active, dirty: dirty, changed: changed}" buffer="buffer" ng-repeat="buffer in session.getBufferArray() | orderBy:&#39;filename&#39;">
+  <ul class="participants">
+    <!-- ngRepeat: (id, participant) in buffer.participants -->
+  </ul>
+  <a class="filename ng-binding" ng-click="activateBuffer(buffer)" ng-dblclick="promptFileRename(buffer) | trackEvent:&#39;File&#39;:&#39;Rename&#39;:&#39;Sidebar&#39;">list.component.ts</a>
+  <ul class="file-ops">
+    <li class="delete">
+      <button ng-click="promptFileDelete(buffer) | trackEvent:&#39;File&#39;:&#39;Delete&#39;:&#39;Sidebar&#39;" class="btn btn-mini ng-scope" tooltip="Delete this file" tooltip-placement="right">
+        <i class="icon-remove"></i>
+      </button>
+    </li>
+  </ul>
+</li><li class="file ng-scope" ng-class="{active: active, dirty: dirty, changed: changed}" buffer="buffer" ng-repeat="buffer in session.getBufferArray() | orderBy:&#39;filename&#39;">
+  <ul class="participants">
+    <!-- ngRepeat: (id, participant) in buffer.participants -->
+  </ul>
+  <a class="filename ng-binding" ng-click="activateBuffer(buffer)" ng-dblclick="promptFileRename(buffer) | trackEvent:&#39;File&#39;:&#39;Rename&#39;:&#39;Sidebar&#39;">README.md</a>
+  <ul class="file-ops">
+    <li class="delete">
+      <button ng-click="promptFileDelete(buffer) | trackEvent:&#39;File&#39;:&#39;Delete&#39;:&#39;Sidebar&#39;" class="btn btn-mini ng-scope" tooltip="Delete this file" tooltip-placement="right">
+        <i class="icon-remove"></i>
+      </button>
+    </li>
+  </ul>
+</li><li class="file ng-scope" ng-class="{active: active, dirty: dirty, changed: changed}" buffer="buffer" ng-repeat="buffer in session.getBufferArray() | orderBy:&#39;filename&#39;">
+  <ul class="participants">
+    <!-- ngRepeat: (id, participant) in buffer.participants -->
+  </ul>
+  <a class="filename ng-binding" ng-click="activateBuffer(buffer)" ng-dblclick="promptFileRename(buffer) | trackEvent:&#39;File&#39;:&#39;Rename&#39;:&#39;Sidebar&#39;">styles.css</a>
+  <ul class="file-ops">
+    <li class="delete">
+      <button ng-click="promptFileDelete(buffer) | trackEvent:&#39;File&#39;:&#39;Delete&#39;:&#39;Sidebar&#39;" class="btn btn-mini ng-scope" tooltip="Delete this file" tooltip-placement="right">
+        <i class="icon-remove"></i>
+      </button>
+    </li>
+  </ul>
+</li><li class="file ng-scope" ng-class="{active: active, dirty: dirty, changed: changed}" buffer="buffer" ng-repeat="buffer in session.getBufferArray() | orderBy:&#39;filename&#39;">
+  <ul class="participants">
+    <!-- ngRepeat: (id, participant) in buffer.participants -->
+  </ul>
+  <a class="filename ng-binding" ng-click="activateBuffer(buffer)" ng-dblclick="promptFileRename(buffer) | trackEvent:&#39;File&#39;:&#39;Rename&#39;:&#39;Sidebar&#39;">systemjs.config.js</a>
+  <ul class="file-ops">
+    <li class="delete">
+      <button ng-click="promptFileDelete(buffer) | trackEvent:&#39;File&#39;:&#39;Delete&#39;:&#39;Sidebar&#39;" class="btn btn-mini ng-scope" tooltip="Delete this file" tooltip-placement="right">
+        <i class="icon-remove"></i>
+      </button>
+    </li>
+  </ul>
+</li><li class="file ng-scope" ng-class="{active: active, dirty: dirty, changed: changed}" buffer="buffer" ng-repeat="buffer in session.getBufferArray() | orderBy:&#39;filename&#39;">
+  <ul class="participants">
+    <!-- ngRepeat: (id, participant) in buffer.participants -->
+  </ul>
+  <a class="filename ng-binding" ng-click="activateBuffer(buffer)" ng-dblclick="promptFileRename(buffer) | trackEvent:&#39;File&#39;:&#39;Rename&#39;:&#39;Sidebar&#39;">tsconfig.json</a>
+  <ul class="file-ops">
+    <li class="delete">
+      <button ng-click="promptFileDelete(buffer) | trackEvent:&#39;File&#39;:&#39;Delete&#39;:&#39;Sidebar&#39;" class="btn btn-mini ng-scope" tooltip="Delete this file" tooltip-placement="right">
+        <i class="icon-remove"></i>
+      </button>
+    </li>
+  </ul>
+</li>
+        <li class="newfile">
+          <a ng-click="promptFileAdd() | trackEvent:&#39;File&#39;:&#39;Add&#39;:&#39;Sidebar&#39;">
+            <i class="icon-file"></i> New file
+          </a>
+        </li>
+      </ul>
+    </details>
+    <details ng-show="session.isSaved()" style="">
+      <summary class="header">Versions <span class="label ng-binding" ng-bind="session.plunk.history.length | number">75</span></summary>
+      <ul class="plunker-filelist nav nav-list">
+        <!-- ngRepeat: event in session.plunk.history | orderBy:'-created_at' --><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope active">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-11-02T03:04:54.000Z" title="Nov 1, 2016 11:04:54 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-27T02:30:16.000Z" title="Oct 26, 2016 10:30:16 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-23T01:05:56.000Z" title="Oct 22, 2016 9:05:56 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-23T01:05:26.000Z" title="Oct 22, 2016 9:05:26 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-git-fork"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Forked</span>
+            <abbr timeago="2016-10-23T01:04:35.000Z" title="Oct 22, 2016 9:04:35 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-23T01:03:51.000Z" title="Oct 22, 2016 9:03:51 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-23T01:03:29.000Z" title="Oct 22, 2016 9:03:29 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:39:08.000Z" title="Oct 22, 2016 2:39:08 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:38:51.000Z" title="Oct 22, 2016 2:38:51 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:38:26.000Z" title="Oct 22, 2016 2:38:26 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:36:44.000Z" title="Oct 22, 2016 2:36:44 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-git-fork"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Forked</span>
+            <abbr timeago="2016-10-22T18:35:58.000Z" title="Oct 22, 2016 2:35:58 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:35:51.000Z" title="Oct 22, 2016 2:35:51 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:32:12.000Z" title="Oct 22, 2016 2:32:12 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:31:47.000Z" title="Oct 22, 2016 2:31:47 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:11:33.000Z" title="Oct 22, 2016 2:11:33 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:11:09.000Z" title="Oct 22, 2016 2:11:09 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:09:38.000Z" title="Oct 22, 2016 2:09:38 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:09:13.000Z" title="Oct 22, 2016 2:09:13 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:09:06.000Z" title="Oct 22, 2016 2:09:06 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T18:03:33.000Z" title="Oct 22, 2016 2:03:33 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T17:51:57.000Z" title="Oct 22, 2016 1:51:57 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T17:49:39.000Z" title="Oct 22, 2016 1:49:39 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T17:48:41.000Z" title="Oct 22, 2016 1:48:41 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T17:48:32.000Z" title="Oct 22, 2016 1:48:32 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T17:34:04.000Z" title="Oct 22, 2016 1:34:04 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T17:23:26.000Z" title="Oct 22, 2016 1:23:26 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T17:21:03.000Z" title="Oct 22, 2016 1:21:03 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T17:20:55.000Z" title="Oct 22, 2016 1:20:55 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T16:52:59.000Z" title="Oct 22, 2016 12:52:59 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-git-fork"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Forked</span>
+            <abbr timeago="2016-10-22T16:51:56.000Z" title="Oct 22, 2016 12:51:56 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T05:12:00.000Z" title="Oct 22, 2016 1:12:00 AM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T05:11:10.000Z" title="Oct 22, 2016 1:11:10 AM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-22T04:21:14.000Z" title="Oct 22, 2016 12:21:14 AM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T23:58:25.000Z" title="Oct 21, 2016 7:58:25 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T23:21:52.000Z" title="Oct 21, 2016 7:21:52 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T23:20:59.000Z" title="Oct 21, 2016 7:20:59 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T23:20:36.000Z" title="Oct 21, 2016 7:20:36 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T23:19:36.000Z" title="Oct 21, 2016 7:19:36 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T23:16:11.000Z" title="Oct 21, 2016 7:16:11 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T23:00:43.000Z" title="Oct 21, 2016 7:00:43 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T22:59:53.000Z" title="Oct 21, 2016 6:59:53 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-git-fork"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Forked</span>
+            <abbr timeago="2016-10-21T22:49:35.000Z" title="Oct 21, 2016 6:49:35 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:30:00.000Z" title="Oct 21, 2016 3:30:00 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:29:50.000Z" title="Oct 21, 2016 3:29:50 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:26:06.000Z" title="Oct 21, 2016 3:26:06 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:25:57.000Z" title="Oct 21, 2016 3:25:57 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:19:26.000Z" title="Oct 21, 2016 3:19:26 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:19:16.000Z" title="Oct 21, 2016 3:19:16 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:18:02.000Z" title="Oct 21, 2016 3:18:02 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:16:45.000Z" title="Oct 21, 2016 3:16:45 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:16:39.000Z" title="Oct 21, 2016 3:16:39 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:16:31.000Z" title="Oct 21, 2016 3:16:31 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:16:22.000Z" title="Oct 21, 2016 3:16:22 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:16:13.000Z" title="Oct 21, 2016 3:16:13 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:16:04.000Z" title="Oct 21, 2016 3:16:04 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:12:48.000Z" title="Oct 21, 2016 3:12:48 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:12:38.000Z" title="Oct 21, 2016 3:12:38 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:12:30.000Z" title="Oct 21, 2016 3:12:30 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:09:54.000Z" title="Oct 21, 2016 3:09:54 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:09:50.000Z" title="Oct 21, 2016 3:09:50 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:09:20.000Z" title="Oct 21, 2016 3:09:20 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:02:07.000Z" title="Oct 21, 2016 3:02:07 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T19:01:49.000Z" title="Oct 21, 2016 3:01:49 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T18:59:29.000Z" title="Oct 21, 2016 2:59:29 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-21T18:58:47.000Z" title="Oct 21, 2016 2:58:47 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-git-fork"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Forked</span>
+            <abbr timeago="2016-10-21T18:28:04.000Z" title="Oct 21, 2016 2:28:04 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-11T03:11:19.000Z" title="Oct 10, 2016 11:11:19 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-11T02:07:08.000Z" title="Oct 10, 2016 10:07:08 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-11T02:04:25.000Z" title="Oct 10, 2016 10:04:25 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-11T02:03:52.000Z" title="Oct 10, 2016 10:03:52 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-11T02:03:00.000Z" title="Oct 10, 2016 10:03:00 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-11T01:51:43.000Z" title="Oct 10, 2016 9:51:43 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-save"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Updated</span>
+            <abbr timeago="2016-10-11T01:50:21.000Z" title="Oct 10, 2016 9:50:21 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li><li ng-class="{active: $index==session.currentRevisionIndex, frozen: $index==session.plunk.frozen_version}" ng-repeat="event in session.plunk.history | orderBy:&#39;-created_at&#39;" class="ng-scope  frozen">
+          <a ng-click="revertTo($index) | trackEvent:&#39;Plunk&#39;:&#39;Revert&#39;:&#39;Sidebar&#39;">
+            <i ng-class="event.event | eventIcon" class="icon-file"></i>
+            <span ng-bind="event.event | eventName" class="ng-binding">Created</span>
+            <abbr timeago="2016-10-11T01:47:27.000Z" title="Oct 10, 2016 9:47:27 PM">3 years ago</abbr>
+            <i class="icon-lock ng-scope" ng-show="session.plunk.frozen_at &amp;&amp; $index==session.plunk.history.length - 1 - session.plunk.frozen_version" tooltip="The plunk is currently frozen at this version" tooltip-placement="right" style="display: none;"></i>
+          </a>
+        </li>
+      </ul>
+    </details>
+    <details open="">
+      <summary class="header">Plunk</summary>
+      <form class="ng-pristine ng-valid">
+        <div>
+          <label for="plunk-description">
+            <div>Description:</div>
+            <textarea id="plunk-description" rows="2" ng-model="session.description" class="ng-pristine ng-valid" style="overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 70px;"></textarea>
+          </label>
+          <label for="plunk-tags">
+            <div>Tags:</div>
+            <div class="select2-container select2-container-multi ng-pristine ng-valid" id="s2id_plunker-tags" style="width: 100%;">    <ul class="select2-choices">  <li class="select2-search-choice">    <div>angular2</div>    <a href="https://plnkr.co/edit/#" onclick="return false;" class="select2-search-choice-close" tabindex="-1"></a></li><li class="select2-search-choice">    <div>example</div>    <a href="https://plnkr.co/edit/#" onclick="return false;" class="select2-search-choice-close" tabindex="-1"></a></li><li class="select2-search-choice">    <div>fundamentals</div>    <a href="https://plnkr.co/edit/#" onclick="return false;" class="select2-search-choice-close" tabindex="-1"></a></li><li class="select2-search-choice">    <div>pluralsight</div>    <a href="https://plnkr.co/edit/#" onclick="return false;" class="select2-search-choice-close" tabindex="-1"></a></li><li class="select2-search-field">    <input type="text" autocomplete="off" class="select2-input select2-default" id="s2id_autogen1" style="width: 10px;">  </li></ul><div class="select2-drop select2-drop-multi" style="display:none;">   <ul class="select2-results">   </ul></div></div><input type="hidden" ng-list="" id="plunker-tags" ng-model="session.tags" class="ng-pristine ng-valid select2-offscreen" tabindex="-1" style="" value="angular2,example,fundamentals,pluralsight"></label>
+          <div ng-show="session.isSaved()" style="">
+            <div>User:</div>
+            <span class="inline-user registered" ng-class="{registered: !!user}" ng-switch="" on="!!user" user="session.plunk.user">
+  <!-- ngSwitchWhen: true -->
+  
+  <!-- ngSwitchWhen: false -->
+<a ng-href="/users/jmcooper" ng-switch-when="true" class="ng-scope ng-binding" href="https://plnkr.co/users/jmcooper">
+    <img class="gravatar" ng-src="https://www.gravatar.com/avatar/?s=18&amp;d=mm" src="./Plunker_files/none.png">
+    jmcooper
+  </a></span>
+          </div>
+          <div ng-hide="session.isSaved() || !visitor.isMember()" style="display: none;">
+            <div>Privacy:</div>
+            <label>
+              <span tooltip="Only users who know the url of the plunk will be able to view it" tooltip-placement="right" class="ng-scope">
+                <input type="checkbox" ng-model="session.private" class="ng-pristine ng-valid">
+                private plunk
+              </span>
+            </label>
+          </div>
+          <div ng-show="session.isSaved()" style="">
+            <div>Privacy:</div>
+            <abbr ng-show="session.plunk.private" tooltip-placement="right" tooltip="Only users who know the url of the plunk will be able to view it" class="ng-scope" style=""><i class="icon-lock"></i> private plunk</abbr>
+            <abbr ng-hide="session.plunk.private" tooltip-placement="right" tooltip="Everyone can see this plunk" class="ng-scope" style="display: none;"><i class="icon-unlock"></i> public plunk</abbr>
+          </div>
+        </div>
+      </form>
+    </details>
+  </div>
+  <div class="plunker-sidebar-footer">
+    <a class="ag-grid-banner" href="https://www.ag-grid.com/?utm_source=plunker&amp;utm_medium=banner&amp;utm_campaign=sponsorship" target="_blank" rel="noopener">
+      <img src="./Plunker_files/ag-grid-logo.svg">
+      <h4>Plunker is Backed By:</h4>
+      <p>The JavaScript DataGrid for Enterprise</p>
+      <span>Read more…</span>
+    </a>
+  </div>
+</div>
+  </div>
+  <div class="ui-layout-center ui-layout-pane ui-layout-pane-center ui-layout-container" style="position: absolute; margin: 0px; left: 254px; right: 42px; top: 0px; bottom: 0px; height: 853px; width: 1624px; z-index: 0; display: block; visibility: visible; overflow: hidden;">
+    <div class="ui-layout-center ui-layout-pane ui-layout-pane-center" style="position: absolute; margin: 0px; left: 0px; right: 814px; top: 0px; bottom: 0px; height: 853px; width: 810px; z-index: 0; display: block; visibility: visible;">
+      <div class="plunker-ace">
+  <!-- ngRepeat: (id, buffer) in session.buffers --><div class="plunker-edit-session ng-scope ng-pristine ng-valid" ng-model="buffer.content" buffer="buffer" ng-repeat="(id, buffer) in session.buffers">
+</div><div class="plunker-edit-session ng-scope ng-valid ng-dirty" ng-model="buffer.content" buffer="buffer" ng-repeat="(id, buffer) in session.buffers">
+</div><div class="plunker-edit-session ng-scope ng-valid ng-dirty" ng-model="buffer.content" buffer="buffer" ng-repeat="(id, buffer) in session.buffers">
+</div><div class="plunker-edit-session ng-scope ng-pristine ng-valid" ng-model="buffer.content" buffer="buffer" ng-repeat="(id, buffer) in session.buffers">
+</div><div class="plunker-edit-session ng-scope ng-valid ng-dirty" ng-model="buffer.content" buffer="buffer" ng-repeat="(id, buffer) in session.buffers">
+</div><div class="plunker-edit-session ng-scope ng-pristine ng-valid" ng-model="buffer.content" buffer="buffer" ng-repeat="(id, buffer) in session.buffers">
+</div><div class="plunker-edit-session ng-scope ng-pristine ng-valid" ng-model="buffer.content" buffer="buffer" ng-repeat="(id, buffer) in session.buffers">
+</div><div class="plunker-edit-session ng-scope ng-pristine ng-valid" ng-model="buffer.content" buffer="buffer" ng-repeat="(id, buffer) in session.buffers">
+</div><div class="plunker-edit-session ng-scope ng-pristine ng-valid" ng-model="buffer.content" buffer="buffer" ng-repeat="(id, buffer) in session.buffers">
+</div><div class="plunker-edit-session ng-scope ng-pristine ng-valid" ng-model="buffer.content" buffer="buffer" ng-repeat="(id, buffer) in session.buffers">
+</div>
+  <!-- ngRepeat: (id, participant) in participants -->
+  <div class="plunker-ace-canvas ace_editor ace-tm" draggable="false"><textarea class="ace_text-input" wrap="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="opacity: 0; height: 14px; width: 6.59781px; left: 262.13px; top: 56px;"></textarea><div class="ace_gutter"><div class="ace_layer ace_gutter-layer ace_folding-enabled" style="margin-top: 0px; height: 881px; width: 47px;"><div class="ace_gutter-cell " style="height: 14px;">1</div><div class="ace_gutter-cell " style="height: 14px;">2</div><div class="ace_gutter-cell " style="height: 14px;">3</div><div class="ace_gutter-cell " style="height: 14px;">4</div><div class="ace_gutter-cell " style="height: 14px;">5</div><div class="ace_gutter-cell " style="height: 14px;">6</div><div class="ace_gutter-cell " style="height: 14px;">7<span class="ace_fold-widget ace_start ace_open" style="height: 14px;"></span></div><div class="ace_gutter-cell " style="height: 14px;">8</div><div class="ace_gutter-cell " style="height: 14px;">9<span class="ace_fold-widget ace_start ace_open" style="height: 14px;"></span></div><div class="ace_gutter-cell " style="height: 14px;">10</div><div class="ace_gutter-cell " style="height: 14px;">11</div><div class="ace_gutter-cell " style="height: 14px;">12</div><div class="ace_gutter-cell " style="height: 14px;">13</div><div class="ace_gutter-cell " style="height: 14px;">14</div><div class="ace_gutter-cell " style="height: 14px;">15</div><div class="ace_gutter-cell " style="height: 14px;">16<span class="ace_fold-widget ace_start ace_open" style="height: 14px;"></span></div><div class="ace_gutter-cell " style="height: 14px;">17</div><div class="ace_gutter-cell " style="height: 14px;">18</div><div class="ace_gutter-cell " style="height: 14px;">19</div><div class="ace_gutter-cell " style="height: 14px;">20</div></div><div class="ace_gutter-active-line" style="top: 56px; height: 14px;"></div></div><div class="ace_scroller" style="left: 47px; right: 0px; bottom: 0px;"><div class="ace_content" style="margin-top: 0px; width: 763px; height: 881px; margin-left: 0px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 531.825px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"><div class="ace_active-line" style="height:14px;top:56px;left:0;right:0;"></div></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"><div class="ace_line" style="height:14px"><span class="ace_keyword">import</span> <span class="ace_paren ace_lparen">{</span> <span class="ace_identifier">NgModule</span> <span class="ace_paren ace_rparen">}</span> <span class="ace_identifier">from</span> <span class="ace_string">'@angular/core'</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height:14px"><span class="ace_keyword">import</span> <span class="ace_paren ace_lparen">{</span> <span class="ace_identifier">BrowserModule</span> <span class="ace_paren ace_rparen">}</span> <span class="ace_identifier">from</span> <span class="ace_string">'@angular/platform-browser'</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height:14px"></div><div class="ace_line" style="height:14px"><span class="ace_keyword">import</span> <span class="ace_paren ace_lparen">{</span> <span class="ace_identifier">AppComponent</span> <span class="ace_paren ace_rparen">}</span> <span class="ace_identifier">from</span> <span class="ace_string">'./app.component'</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height:14px"><span class="ace_keyword">import</span> <span class="ace_paren ace_lparen">{</span> <span class="ace_identifier">ListComponent</span> <span class="ace_paren ace_rparen">}</span> <span class="ace_identifier">from</span> <span class="ace_string">'./list.component'</span><span class="ace_punctuation ace_operator">;</span></div><div class="ace_line" style="height:14px"></div><div class="ace_line" style="height:14px">@<span class="ace_identifier">NgModule</span><span class="ace_paren ace_lparen">({</span></div><div class="ace_line" style="height:14px">  <span class="ace_identifier">imports</span><span class="ace_punctuation ace_operator">:</span> <span class="ace_paren ace_lparen">[</span> <span class="ace_identifier">BrowserModule</span> <span class="ace_paren ace_rparen">]</span><span class="ace_punctuation ace_operator">,</span></div><div class="ace_line" style="height:14px">  <span class="ace_identifier">declarations</span><span class="ace_punctuation ace_operator">:</span> <span class="ace_paren ace_lparen">[</span></div><div class="ace_line" style="height:14px"><span class="ace_indent-guide">  </span>  <span class="ace_identifier">AppComponent</span><span class="ace_punctuation ace_operator">,</span></div><div class="ace_line" style="height:14px"><span class="ace_indent-guide">  </span>  <span class="ace_identifier">ListComponent</span></div><div class="ace_line" style="height:14px">  <span class="ace_paren ace_rparen">]</span><span class="ace_punctuation ace_operator">,</span></div><div class="ace_line" style="height:14px">  <span class="ace_identifier">providers</span><span class="ace_punctuation ace_operator">:</span> <span class="ace_paren ace_lparen">[</span>  <span class="ace_paren ace_rparen">]</span><span class="ace_punctuation ace_operator">,</span></div><div class="ace_line" style="height:14px">  <span class="ace_identifier">bootstrap</span><span class="ace_punctuation ace_operator">:</span> <span class="ace_paren ace_lparen">[</span> <span class="ace_identifier">AppComponent</span> <span class="ace_paren ace_rparen">]</span></div><div class="ace_line" style="height:14px"><span class="ace_paren ace_rparen">})</span></div><div class="ace_line" style="height:14px"><span class="ace_keyword">export</span> <span class="ace_keyword">class</span> <span class="ace_identifier">AppModule</span> <span class="ace_paren ace_lparen">{</span></div><div class="ace_line" style="height:14px"></div><div class="ace_line" style="height:14px"><span class="ace_paren ace_rparen">}</span></div><div class="ace_line" style="height:14px"></div><div class="ace_line" style="height:14px"></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer ace_hidden-cursors"><div class="ace_cursor" style="left: 215.13px; top: 56px; width: 6.59781px; height: 14px;"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 22px; bottom: 0px;"><div class="ace_scrollbar-inner" style="width: 22px; height: 280px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="height: 22px; left: 47px; right: 0px; display: none;"><div class="ace_scrollbar-inner" style="height: 22px; width: 763px;"></div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div></div>
+</div>
+    </div>
+    <div class="ui-layout-east plunker-multipane ui-layout-pane ui-layout-pane-east" style="position: absolute; margin: 0px; left: auto; right: 0px; top: 0px; bottom: 0px; height: 853px; z-index: 0; width: 810px; display: block; visibility: visible;">
+  <!-- ngRepeat: pane in panes.panes --><div class="plunker-pane ng-scope" ng-show="pane==panes.active" use-pane="pane" ng-repeat="pane in panes.panes" style="display: none;"><div class="plunker-catalogue ng-scope">
+  <form class="plunker-searchbar ng-pristine ng-valid" ng-class="{markup: updater}" ng-submit="search()">
+    <div ng-show="updater" class="pull-right" style="display: none;">
+      <a ng-hide="dirty" class="label updates ng-binding" ng-class="{&#39;label-important&#39;: markup.obsolete.length}" ng-click="openPackages()" ng-bind="markup.dependencies.length | number" style="display: none;"></a>
+      <a ng-show="dirty" class="label updates" ng-click="refreshDependencies()" style=""><i class="icon-refresh"></i></a>
+    </div>
+    <a class="btn pull-left" ng-click="goHome()"><i class="icon-home"></i></a>
+    <div class="plunker-searchbox input-append">
+      <div class="input-wrapper">
+        <input class="ng-pristine ng-valid" type="text" ng-model="searchTerm" placeholder="Search packages...">
+      </div>
+      <button class="btn"><i class="icon-search"></i></button>
+    </div>
+  </form>
+  <div ng-switch="" on="state.view">
+    <!-- ngSwitchWhen: dependencies -->
+    <!-- ngSwitchWhen: popular -->
+    <!-- ngSwitchWhen: search -->
+    <!-- ngSwitchWhen: package.version -->
+    <!-- ngSwitchWhen: package.edit -->
+    <!-- ngSwitchWhen: package.version.edit -->
+  <div ng-switch-when="popular" class="ng-scope">
+      <div class="sub-header">
+        <h3>
+          <small ng-show="visitor.user.login" class="pull-right" style="display: none;"><a ng-click="createPackage()">Add new...</a></small>
+          Popular packages
+        </h3>
+      </div>
+      <!-- ngRepeat: package in popular -->
+      <div class="plunker-pager pagination" ng-switch="" on="nolink" nolink="true" collection="popular" nav="popular.refresh(url)">
+  <!-- ngSwitchWhen: false -->
+  <!-- ngSwitchWhen: true -->
+<ul ng-switch-when="true" class="ng-scope">
+    <!-- ngRepeat: link in pages -->
+  </ul></div>
+    </div></div>
+</div></div><div class="plunker-pane ng-scope" ng-show="pane==panes.active" use-pane="pane" ng-repeat="pane in panes.panes" style="display: none;"><div class="plunker-chat gitter-chat-embed ng-scope">
+  Loading Gitter...
+</div></div><div class="plunker-pane ng-scope" ng-show="pane==panes.active" use-pane="pane" ng-repeat="pane in panes.panes" style="display: none;"><div class="plunker-info ng-scope">
+  <h3 class="ng-binding">
+    <a class="permalink pull-right" ng-href="//run.plnkr.co/plunks/K5VCArHCCMp6md3R6EPn/" target="_blank" href="https://run.plnkr.co/plunks/K5VCArHCCMp6md3R6EPn/"><i class="icon icon-link"></i></a>
+    Creating a Data-bound Component - Angular 2 Practice Exercise
+  </h3>
+  <div class="info-creation">
+    <ul class="pull-right plunk-info" plunk="session.plunk">
+  <!--<li class="comments" tooltip="Comments and replunks">
+    <span><i class="icon-comments"></i>{{plunk.comments.length || 0}}</span>
+  </li>-->
+  <li class="forks ng-scope" tooltip="Forks of this plunk">
+    <span class="ng-binding"><i class="icon-git-fork"></i>370</span>
+  </li>
+  <li class="stars ng-scope" tooltip="Star this plunk">
+    <span class="ng-binding"><i class="icon-star"></i>19</span>
+  </li>
+  <li class="views ng-scope" tooltip="Views of this plunk">
+    <span class="ng-binding"><i class="icon-eye-open"></i>47k</span>
+  </li>
+</ul>
+    <span class="inline-user registered" ng-class="{registered: !!user}" ng-switch="" on="!!user" user="session.plunk.user">
+  <!-- ngSwitchWhen: true -->
+  
+  <!-- ngSwitchWhen: false -->
+<a ng-href="/users/jmcooper" ng-switch-when="true" class="ng-scope ng-binding" href="https://plnkr.co/users/jmcooper">
+    <img class="gravatar" ng-src="https://www.gravatar.com/avatar/?s=18&amp;d=mm" src="./Plunker_files/none.png">
+    jmcooper
+  </a></span>
+    <abbr class="timeago updated_at" title="Nov 1, 2016 11:04:54 PM" timeago="Nov 1, 2016 11:04:54 PM">3 years ago</abbr>
+  </div>
+  <ul class="plunker-taglist" tags="session.plunk.tags" ng-show="tags.length" style="">
+  <!-- ngRepeat: tag in tags --><li ng-repeat="tag in tags" class="ng-scope">
+    <a ng-href="/tags/angular2" class="ng-binding" href="https://plnkr.co/tags/angular2">angular2</a>
+  </li><li ng-repeat="tag in tags" class="ng-scope">
+    <a ng-href="/tags/example" class="ng-binding" href="https://plnkr.co/tags/example">example</a>
+  </li><li ng-repeat="tag in tags" class="ng-scope">
+    <a ng-href="/tags/fundamentals" class="ng-binding" href="https://plnkr.co/tags/fundamentals">fundamentals</a>
+  </li><li ng-repeat="tag in tags" class="ng-scope">
+    <a ng-href="/tags/pluralsight" class="ng-binding" href="https://plnkr.co/tags/pluralsight">pluralsight</a>
+  </li>
+</ul>
+  <p></p>
+  <div class="info-readme" ng-show="session.plunk.getReadme()" markdown="session.plunk.getReadme()" style=""><h1 id="creating-a-data-bound-component">Creating a Data-bound Component</h1>
+<h3 id="-angular-2-fundamentals-https-app-pluralsight-com-courses-angular2-fundamentals-practice-exercise"><a href="https://app.pluralsight.com/courses/angular2-fundamentals">Angular 2 Fundamentals</a> Practice Exercise</h3>
+<p><strong><em>Instructions</em></strong>: This project already has an app component and is all bootstrapped. Add a new 
+component to display a list of upcoming events using the html and data below. Then load that 
+component from the inline template in the app component (app/app.component.ts). To do this, 
+you will need to:</p>
+<ol>
+<li><p>Create the component </p>
+<p>You can use either an inline template or a separate template file. The html (without 
+data-bindings) for the template is <strong><em>below</em></strong>.</p>
+</li>
+<li><p>Add a property on the component to hold the data. </p>
+<p>The data for the component is also <strong><em>below</em></strong>.</p>
+</li>
+<li><p>Add the necessary data-bindings (using interpolation) to your component's template</p>
+</li>
+<li><p>Add the component to the app module (app/app.module.ts)</p>
+</li>
+<li><p>Load the component from the app component's template (app/app.component.ts)</p>
+</li>
+</ol>
+<p><strong><em>When you're done, be sure to run the Plunk and you should see a congratulations message.</em></strong></p>
+<p>A finished version of this exercise is available here for reference: <a href="https://plnkr.co/edit/smwlP0iVvY7vjH9vBhPf?p=info">https://plnkr.co/edit/smwlP0iVvY7vjH9vBhPf?p=info</a></p>
+<h4 id="_here-is-the-starting-html-for-the-template-_"><em>Here is the starting html for the template:</em></h4>
+<pre><code>&lt;div&gt;
+  &lt;h1&gt;Congratulations!&lt;/h1&gt;
+  &lt;h4&gt;You got your component to display!&lt;/h4&gt;
+  &lt;hr&gt;
+  &lt;h5&gt;How does your event look below?&lt;/h5&gt;
+
+  &lt;div style="margin-top:30px"&gt;
+    Event:
+  &lt;/div&gt;
+  &lt;div&gt;
+    Date:
+  &lt;/div&gt;
+  &lt;div&gt;
+    Time:
+  &lt;/div&gt;
+  &lt;div&gt;
+    Address:
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h4 id="_here-is-the-data-_"><em>Here is the data:</em></h4>
+<pre><code>{name:'ngConf 2025', date: '3/1/2025', time: '8am', location: {address: '123 Main St', city: 'Salt Lake City, UT', country: 'USA'}}</code></pre>
+</div>
+  <div class="alert alert-info" ng-hide="session.plunk.getReadme()" style="display: none;">
+    <h4>Describe your plunks in Markdown</h4>
+    <p>You can give your plunks long-form descriptions now by creating a README.md
+      file. The first two paragraphs of the readme (including title) will be shown
+      on the plunk 'cards' on the front page. The readme will also be available in its
+      full form here and at other relevant places in the Plunker ecosystem.
+    </p>
+  </div>
+  <div style="display: none">
+    <ul class="plunker-comment-list">
+      <!-- ngRepeat: comment in session.plunk.comments -->
+    </ul>
+    <div class="plunker-comment-box">
+      <textarea ng-keypress="onKeyPress()" ng-model="draft" class="ng-pristine ng-valid" style="overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 42px;"></textarea>
+    </div>
+  </div>
+</div></div><div class="plunker-pane ng-scope" ng-show="pane==panes.active" use-pane="pane" ng-repeat="pane in panes.panes" style="display: none;"><div class="plunker-linter ng-scope">
+  <div class="note-filters">
+    <div class="btn-group">
+      <button type="button" ng-click="filters.error = !filters.error" ng-class="{active: filters.error}" class="btn btn-danger active">Errors</button>
+      <button type="button" ng-click="filters.warning = !filters.warning" ng-class="{active: filters.warning}" class="btn btn-warning">Warnings</button>
+      <button type="button" ng-click="filters.info = !filters.info" ng-class="{active: filters.info}" class="btn btn-info">Information</button>
+    </div>
+  </div>
+  <!-- ngRepeat: (buffId, notes) in annotations --><section ng-repeat="(buffId, notes) in annotations" class="ng-scope">
+    <h4 class="ng-binding">README.md</h4>
+    <ul class="notes-list">
+      <li ng-hide="relevantNotes(notes, filters).length" class="alert alert-success">
+        No matching notes
+      </li>
+      <!-- ngRepeat: note in relevantNotes(notes, filters) -->
+    </ul>
+  </section><section ng-repeat="(buffId, notes) in annotations" class="ng-scope">
+    <h4 class="ng-binding">app/app.module.ts</h4>
+    <ul class="notes-list">
+      <li ng-hide="relevantNotes(notes, filters).length" class="alert alert-success">
+        No matching notes
+      </li>
+      <!-- ngRepeat: note in relevantNotes(notes, filters) -->
+    </ul>
+  </section><section ng-repeat="(buffId, notes) in annotations" class="ng-scope">
+    <h4 class="ng-binding">list.component.ts</h4>
+    <ul class="notes-list">
+      <li ng-hide="relevantNotes(notes, filters).length" class="alert alert-success">
+        No matching notes
+      </li>
+      <!-- ngRepeat: note in relevantNotes(notes, filters) -->
+    </ul>
+  </section><section ng-repeat="(buffId, notes) in annotations" class="ng-scope">
+    <h4 class="ng-binding">app/main.ts</h4>
+    <ul class="notes-list">
+      <li ng-hide="relevantNotes(notes, filters).length" class="alert alert-success">
+        No matching notes
+      </li>
+      <!-- ngRepeat: note in relevantNotes(notes, filters) -->
+    </ul>
+  </section><section ng-repeat="(buffId, notes) in annotations" class="ng-scope">
+    <h4 class="ng-binding">app/app.component.ts</h4>
+    <ul class="notes-list">
+      <li ng-hide="relevantNotes(notes, filters).length" class="alert alert-success">
+        No matching notes
+      </li>
+      <!-- ngRepeat: note in relevantNotes(notes, filters) -->
+    </ul>
+  </section><section ng-repeat="(buffId, notes) in annotations" class="ng-scope">
+    <h4 class="ng-binding">styles.css</h4>
+    <ul class="notes-list">
+      <li ng-hide="relevantNotes(notes, filters).length" class="alert alert-success">
+        No matching notes
+      </li>
+      <!-- ngRepeat: note in relevantNotes(notes, filters) -->
+    </ul>
+  </section><section ng-repeat="(buffId, notes) in annotations" class="ng-scope">
+    <h4 class="ng-binding">tsconfig.json</h4>
+    <ul class="notes-list">
+      <li ng-hide="relevantNotes(notes, filters).length" class="alert alert-success">
+        No matching notes
+      </li>
+      <!-- ngRepeat: note in relevantNotes(notes, filters) -->
+    </ul>
+  </section><section ng-repeat="(buffId, notes) in annotations" class="ng-scope">
+    <h4 class="ng-binding">bootstrap.css</h4>
+    <ul class="notes-list">
+      <li ng-hide="relevantNotes(notes, filters).length" class="alert alert-success">
+        No matching notes
+      </li>
+      <!-- ngRepeat: note in relevantNotes(notes, filters) -->
+    </ul>
+  </section><section ng-repeat="(buffId, notes) in annotations" class="ng-scope">
+    <h4 class="ng-binding">index.html</h4>
+    <ul class="notes-list">
+      <li ng-hide="relevantNotes(notes, filters).length" class="alert alert-success">
+        No matching notes
+      </li>
+      <!-- ngRepeat: note in relevantNotes(notes, filters) -->
+    </ul>
+  </section><section ng-repeat="(buffId, notes) in annotations" class="ng-scope">
+    <h4 class="ng-binding">systemjs.config.js</h4>
+    <ul class="notes-list">
+      <li ng-hide="relevantNotes(notes, filters).length" class="alert alert-success">
+        No matching notes
+      </li>
+      <!-- ngRepeat: note in relevantNotes(notes, filters) -->
+    </ul>
+  </section>
+</div></div><div class="plunker-pane ng-scope" ng-show="pane==panes.active" use-pane="pane" ng-repeat="pane in panes.panes" style="display: none;"><div class="plunker-options ng-scope">
+  <form class="ng-pristine ng-valid">
+    <fieldset>
+      <legend>Editor</legend>
+      <label>Theme:
+        <select class="input-medium ng-pristine ng-valid" id="opts-editor-theme" ng-model="settings.editor.theme" ng-options="theme for theme in themes"><option value="0">ambiance</option><option value="1">chrome</option><option value="2">clouds</option><option value="3">clouds_midnight</option><option value="4">crimson_editor</option><option value="5">dawn</option><option value="6">dreamweaver</option><option value="7">eclipse</option><option value="8">github</option><option value="9">idle_fingers</option><option value="10">kr_theme</option><option value="11">merbivore</option><option value="12">merbivore_soft</option><option value="13">monokai</option><option value="14">pastel_on_dark</option><option value="15">solarized_dark</option><option value="16">solarized_light</option><option value="17" selected="selected">textmate</option><option value="18">tomorrow</option><option value="19">tomorrow_night</option><option value="20">tomorrow_night_blue</option><option value="21">tomorrow_night_bright</option><option value="22">twilight</option><option value="23">vibrant_ink</option><option value="24">xcode</option></select>
+      </label>
+      <label>Key Binding:
+        <select class="input-medium ng-pristine ng-valid" id="opts-editor-keyboard-handler" ng-model="settings.editor.keyboard_handler" ng-options="kh for kh in keyboard_handlers"><option value="0" selected="selected">ace</option><option value="1">emacs</option><option value="2">vim</option></select>
+      </label>
+      <label>Tab size:
+        <input class="input-mini ng-pristine ng-valid ng-valid-number" id="opts-editor-tabSize" ng-model="settings.editor.tab_size" type="number">
+      </label>
+      <label>Font size:
+        <input class="input-mini ng-pristine ng-valid ng-valid-number ng-valid-min" id="opts-editor-fontSize" ng-model="settings.editor.font_size" type="number" min="8">
+      </label>
+      <label class="checkbox">
+        <input class="input-mini ng-pristine ng-valid" id="opts-editor-lineWrap" ng-model="settings.editor.wrap.enabled" type="checkbox">
+        Line wrapping
+      </label>
+    </fieldset>
+    <fieldset>
+      <legend>Previewer</legend>
+      <label>Refresh interval:
+        <input class="input-small ng-pristine ng-valid ng-valid-number" id="opts-previewer-delay" ng-model="settings.previewer.delay" ng-disabled="!settings.previewer.auto_refresh" type="number">
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" ng-model="settings.previewer.auto_refresh" class="ng-pristine ng-valid">
+        Auto refresh
+      </label>
+    </fieldset>
+  </form>
+</div></div><div class="plunker-pane ng-scope" ng-show="pane==panes.active" use-pane="pane" ng-repeat="pane in panes.panes" style=""><div class="plunker-previewer ng-scope" ng-switch="" on="mode">
+  <!-- ngSwitchWhen: embedded -->
+  <!-- ngSwitchWhen: windowed -->
+<div ng-switch-when="embedded" class="ng-scope">
+    <div class="plunker-previewer-ops">
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <button id="refresh-preview" ng-click="refresh()" class="btn btn-mini btn-success" title="Manually trigger a refresh of the preview"><i class="icon-refresh icon-white"></i></button>
+          <button id="expand-preview" ng-click="expand()" class="btn btn-mini btn-primary" title="Launch the preview in a separate window"><i class="icon-fullscreen icon-white"></i></button>
+        </div>
+      </div>
+    </div>
+    <iframe name="plunkerPreviewTarget" src="./Plunker_files/saved_resource.html" class="plunker-previewer-iframe" frameborder="0" width="100%" height="100%" scrolling="auto"></iframe>
+  </div></div></div><div class="plunker-pane ng-scope" ng-show="pane==panes.active" use-pane="pane" ng-repeat="pane in panes.panes" style="display: none;"><div class="plunker-recorder ng-scope">
+  <button class="btn btn-success" ng-click="startRecording()" ng-show="!recording &amp;&amp; !events.length">
+    <i class="icon-play-circle"></i>
+    Start recording
+  </button>
+  <button class="btn btn-success" ng-click="stopRecording()" ng-show="recording" style="display: none;">
+    <i class="icon-stop"></i>
+    Finish recording
+  </button>
+  <button class="btn btn-primary" ng-click="promptSave()" ng-show="!recording &amp;&amp; events.length" style="display: none;">
+    <i class="icon-save"></i>
+    Save
+  </button>
+  <button class="btn btn-danger" ng-click="promptReset()" ng-show="!recording &amp;&amp; events.length" style="display: none;">
+    <i class="icon-eject"></i>
+    Reset
+  </button>
+  <div class="plunker-player" events="events" ng-show="events.length &amp;&amp; !recording" style="display: none;">
+  <div class="btn-toolbar">
+    <div class="btn-group">
+      <button class="btn btn-small" ng-click="seekStart()" title="Return to the start of the recorded session" ng-disabled="currentEvent==0" disabled="disabled"><i class="icon-fast-backward"></i></button>
+      <button class="btn btn-small" ng-click="addSpeed(-1)" title="Decrease the playback speed to 0x" ng-disabled="!events.length || speed&lt;=0" disabled="disabled"><i class="icon-backward"></i></button>
+      <button class="btn btn-small" ng-click="play()" ng-hide="playing" ng-disabled="currentEvent==events.length" disabled="disabled"><i class="icon-play"></i></button>
+      <button class="btn btn-small" ng-click="pause()" ng-show="playing" style="display: none;"><i class="icon-pause"></i></button>
+      <button class="btn btn-small" ng-click="stepForward()" ng-disabled="playing || currentEvent==events.length" disabled="disabled"><i class="icon-step-forward"></i></button>
+      <button class="btn btn-small" ng-click="addSpeed(1)" ng-disabled="!events.length" disabled="disabled"><i class="icon-forward"></i></button>
+      <button class="btn btn-small" ng-click="seekEnd()" ng-disabled="currentEvent==events.length" disabled="disabled"><i class="icon-fast-forward"></i></button>
+    </div>
+  </div>
+  <ul class="nav nav-list">
+    <!-- ngRepeat: event in events -->
+  </ul>
+</div>
+</div></div><div class="plunker-pane ng-scope" ng-show="pane==panes.active" use-pane="pane" ng-repeat="pane in panes.panes" style="display: none;"><div class="plunker-streamer ng-scope" ng-switch="stream.streaming">
+  <!-- ngSwitchWhen: streaming -->
+  <!-- ngSwitchDefault:  -->
+<div ng-switch-default="" class="ng-scope">
+    <h3>Streaming</h3>
+    <p>
+      Streaming enables real-time collaboraboration on Plunker. When you
+      join a stream, the contents of your editor are kept in sync with the
+      stream and reflect changes made by others in the same stream.
+    </p>
+    <form ng-submit="startStream(stream)" class="ng-pristine ng-valid">
+      <input class="mediumtext ng-pristine ng-valid" ng-model="stream.id" size="32">
+      <button class="btn btn-primary" type="submit">Stream</button>
+      <div>
+        <label class="radio inline" title="By default, anyone can make changes">
+          <input type="radio" value="public" ng-model="stream.type" class="ng-pristine ng-valid" name="03T">
+          Public
+        </label>
+        <label class="radio inline" title="By default, only the stream&#39;s creator can make changes">
+          <input type="radio" value="presenter" ng-model="stream.type" class="ng-pristine ng-valid" name="03U">
+          Presenter
+        </label>
+      </div>
+    </form>
+    <h4>What happens if I hit save?</h4>
+    <p>
+      The current contents of your plunk will be saved as if you had
+      made all the changes to the files yourstream. No one else in the stream
+      will be affected at all by saving your state.
+    </p>
+    <h4>What happens if I load a template?</h4>
+    <p>
+      If you load a template, the resulting files will be sent to
+      everyone else in the stream as if you had made the changes yourself.
+      This is usually not what you want to do.
+    </p>
+  </div></div></div><div class="plunker-pane ng-scope" ng-show="pane==panes.active" use-pane="pane" ng-repeat="pane in panes.panes" style="display: none;"><div class="plunker-templates ng-scope">
+  <ul class="nav nav-tabs">
+    <li ng-class="{active: filter==&#39;forked&#39;}">
+      <a ng-click="filter=&#39;forked&#39;">Most popular</a>
+    </li>
+    <li ng-show="visitor.isMember()" ng-class="{active: filter==&#39;own&#39;}" style="display: none;">
+      <a ng-click="filter=&#39;own&#39;">Saved templates</a>
+    </li>
+  </ul>
+  <div class="alert alert-block" ng-show="filter==&#39;own&#39; &amp;&amp; templates.length == 0 &amp;&amp; !templates.$$refreshing" style="display: none;">
+    <h4>You do not have any saved templates</h4>
+    <p>To add saved templates, load up a Plunk or gist/template in the editor and hit the briefcase icon at
+      the right end of the toolbar.
+    </p>
+  </div>
+  <ul class="nav nav-list">
+    <!-- ngRepeat: plunk in templates -->
+  </ul>
+  <div class="pagination-right plunker-pager pagination" ng-switch="" on="nolink" collection="templates" nav="moveTo(url)">
+  <!-- ngSwitchWhen: false -->
+  <!-- ngSwitchWhen: true -->
+<ul ng-switch-when="false" class="ng-scope">
+    <!-- ngRepeat: link in pages -->
+  </ul></div>
+
+</div></div>
+<div class="ui-layout-mask ui-layout-mask-east ui-layout-mask-inside-pane" style="display: none; position: absolute; background: rgb(255, 255, 255); z-index: 1; top: 0px; left: 0px; width: 100%; height: 100%;"></div></div>
+  <div id="" class="ui-layout-resizer ui-layout-resizer-east ui-layout-resizer-open ui-layout-resizer-east-open" title="Resize" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: e-resize; right: 810px; height: 853px; width: 4px; top: 0px; display: block;" aria-disabled="false"><div id="" class="ui-layout-toggler ui-layout-toggler-east ui-layout-toggler-open ui-layout-toggler-east-open" title="Close" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 48px; width: 4px; top: 401px; left: 0px;"></div></div></div>
+  <div class="ui-layout-east plunker-paneselector ui-layout-pane ui-layout-pane-east" style="position: absolute; margin: 0px; left: auto; right: 0px; top: 0px; bottom: 0px; height: 853px; z-index: 0; width: 41px; display: block; visibility: visible;">
+  <ul>
+    <!-- ngRepeat: pane in panes.panes | orderBy:'order' --><li tooltip="Live Preview" tooltip-placement="left" ng-repeat="pane in panes.panes | orderBy:&#39;order&#39;" class="plunker-pane-preview active" ng-hide="pane.hidden" ng-class="{active:pane==panes.active}">
+      <a ng-click="panes.toggle(pane) | trackEvent:&#39;Multipane&#39;:(panes.active==pane&amp;&amp;&#39;Show &#39;||&#39;Hide &#39;) + pane.title:&#39;Paneselector&#39;">
+        <i class="icon-eye-open"></i>
+      </a>
+    </li><li tooltip="Find and external libraries" tooltip-placement="left" ng-repeat="pane in panes.panes | orderBy:&#39;order&#39;" class=" plunker-pane-catalogue" ng-hide="pane.hidden" ng-class="{active:pane==panes.active}">
+      <a ng-click="panes.toggle(pane) | trackEvent:&#39;Multipane&#39;:(panes.active==pane&amp;&amp;&#39;Show &#39;||&#39;Hide &#39;) + pane.title:&#39;Paneselector&#39;">
+        <i class="icon-book"></i>
+      </a>
+    </li><li tooltip="Templates" tooltip-placement="left" ng-repeat="pane in panes.panes | orderBy:&#39;order&#39;" class=" plunker-pane-templates" ng-hide="pane.hidden" ng-class="{active:pane==panes.active}">
+      <a ng-click="panes.toggle(pane) | trackEvent:&#39;Multipane&#39;:(panes.active==pane&amp;&amp;&#39;Show &#39;||&#39;Hide &#39;) + pane.title:&#39;Paneselector&#39;">
+        <i class="icon-briefcase"></i>
+      </a>
+    </li><li tooltip="Session Recorder" tooltip-placement="left" ng-repeat="pane in panes.panes | orderBy:&#39;order&#39;" class=" plunker-pane-recorder" ng-hide="pane.hidden" ng-class="{active:pane==panes.active}" style="display: none;">
+      <a ng-click="panes.toggle(pane) | trackEvent:&#39;Multipane&#39;:(panes.active==pane&amp;&amp;&#39;Show &#39;||&#39;Hide &#39;) + pane.title:&#39;Paneselector&#39;">
+        <i class="icon-facetime-video"></i>
+      </a>
+    </li><li tooltip="Chat" tooltip-placement="left" ng-repeat="pane in panes.panes | orderBy:&#39;order&#39;" class=" plunker-pane-gitter" ng-hide="pane.hidden" ng-class="{active:pane==panes.active}">
+      <a ng-click="panes.toggle(pane) | trackEvent:&#39;Multipane&#39;:(panes.active==pane&amp;&amp;&#39;Show &#39;||&#39;Hide &#39;) + pane.title:&#39;Paneselector&#39;">
+        <i class="icon-comments"></i>
+      </a>
+    </li><li tooltip="Info" tooltip-placement="left" ng-repeat="pane in panes.panes | orderBy:&#39;order&#39;" class="plunker-pane-info" ng-hide="pane.hidden" ng-class="{active:pane==panes.active}" style="">
+      <a ng-click="panes.toggle(pane) | trackEvent:&#39;Multipane&#39;:(panes.active==pane&amp;&amp;&#39;Show &#39;||&#39;Hide &#39;) + pane.title:&#39;Paneselector&#39;">
+        <i class="icon-dashboard"></i>
+      </a>
+    </li><li tooltip="Code Linting" tooltip-placement="left" ng-repeat="pane in panes.panes | orderBy:&#39;order&#39;" class=" plunker-pane-linter" ng-hide="pane.hidden" ng-class="{active:pane==panes.active}">
+      <a ng-click="panes.toggle(pane) | trackEvent:&#39;Multipane&#39;:(panes.active==pane&amp;&amp;&#39;Show &#39;||&#39;Hide &#39;) + pane.title:&#39;Paneselector&#39;">
+        <i class="icon-check"></i>
+      </a>
+    </li><li tooltip="Collaboration" tooltip-placement="left" ng-repeat="pane in panes.panes | orderBy:&#39;order&#39;" class=" plunker-pane-streamer" ng-hide="pane.hidden" ng-class="{active:pane==panes.active}">
+      <a ng-click="panes.toggle(pane) | trackEvent:&#39;Multipane&#39;:(panes.active==pane&amp;&amp;&#39;Show &#39;||&#39;Hide &#39;) + pane.title:&#39;Paneselector&#39;">
+        <i class="icon-retweet"></i>
+      </a>
+    </li><li tooltip="Editor Options" tooltip-placement="left" ng-repeat="pane in panes.panes | orderBy:&#39;order&#39;" class=" plunker-pane-options" ng-hide="pane.hidden" ng-class="{active:pane==panes.active}">
+      <a ng-click="panes.toggle(pane) | trackEvent:&#39;Multipane&#39;:(panes.active==pane&amp;&amp;&#39;Show &#39;||&#39;Hide &#39;) + pane.title:&#39;Paneselector&#39;">
+        <i class="icon-cog"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="" class="ui-layout-resizer ui-layout-resizer-west ui-layout-resizer-open ui-layout-resizer-west-open" title="Resize" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: w-resize; left: 250px; height: 853px; width: 4px; top: 0px;" aria-disabled="false"><div id="" class="ui-layout-toggler ui-layout-toggler-west ui-layout-toggler-open ui-layout-toggler-west-open" title="Close" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 48px; width: 4px; top: 401px; left: 0px;"></div></div><div id="" class="ui-layout-resizer ui-layout-resizer-east ui-layout-resizer-open ui-layout-resizer-east-open" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; right: 41px; cursor: default; height: 853px; width: 1px; top: 0px;"></div></div>
+<ng-view><div class="ng-scope"></div></ng-view>
+<div class="plunker-edit-footer plunker-full-width"><div class="plunker-ad-wrap plunker-codefund" template="bottom-bar" id="codefund-wrap-1564679242330"></div><div class="plunker-about-wrap">    <span class="plunker-about-copy">Plunker © (2016-2018)</span>    <a class="icon-github plunker-about-github" title="Check out Plunker on Github" href="https://github.com/plnkr" rel="noopener" target="_blank"></a>    <a class="icon-twitter plunker-about-twitter" title="Check out Plunker on Twitter" href="https://twitter.com/plnkrco" rel="noopener" target="_blank"></a></div></div><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-T6RZMX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script type="text/javascript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T6RZMX');</script><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; box-sizing: content-box; overflow-wrap: break-word; overflow: hidden; height: 0px !important; min-height: 0px !important; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; word-spacing: 0px; text-indent: 0px; line-height: 20px; width: 206px;" class="autosizejs"></textarea></body></html>

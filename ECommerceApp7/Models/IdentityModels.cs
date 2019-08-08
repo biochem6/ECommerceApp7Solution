@@ -1,8 +1,8 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ECommerceApp7.Models
 {
@@ -16,7 +16,7 @@ namespace ECommerceApp7.Models
             // Add custom user claims here
             return userIdentity;
         }
-   
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -30,5 +30,11 @@ namespace ECommerceApp7.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<SubCategoryItems> SubCategoryItems { get; set; }
     }
 }

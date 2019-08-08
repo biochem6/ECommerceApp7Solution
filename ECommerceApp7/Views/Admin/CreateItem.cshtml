@@ -1,0 +1,108 @@
+﻿@using System.Web.Mvc.Html
+@model ECommerceApp7.ViewModels.CreateItemViewModel
+
+
+
+@{
+    ViewBag.Title = "CreateItem";
+    var cat = ViewBag.categories;
+    var subs = ViewBag.subcategories;
+
+
+}
+
+<h2>Add an Item</h2>
+
+@using (Html.BeginForm("CreateItem", "Admin"))
+{
+    <p class="alert alert-info">All fields are <strong>required</strong>.</p>
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price, new { @class = "form-control", placeholder = "$" })
+        @Html.ValidationMessageFor(m => m.Price)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Description)
+    </div>
+
+    <div class="form-group">
+        <label name="CategoryName">Select Category</label>
+        <select name="CategoryName" class="list-group" id="category" style="width: 10rem">
+            <option selected disabled hidden></option>
+            @foreach (var c in cat)
+            {
+                <option id="Category">@c</option>
+            }
+        </select>
+        @Html.ValidationMessageFor(m => m.CategoryName)
+    </div>
+
+    <div id="subcat_display" class="form-group">
+
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ImageReference)
+        @Html.TextBoxFor(m => m.ImageReference, new { @class = "form-control", placeholder = "ex: image.jpg" })
+        @Html.ValidationMessageFor(m => m.ImageReference)
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+}
+
+@Html.Partial("_BackButtonPartial")
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $("#category").change(function (e) {
+                $("#subcat_display").empty();
+
+                const categorySelected = document.getElementById("category");
+                const categoryValue = categorySelected.options[categorySelected.selectedIndex].text;
+
+                if (categoryValue !== "") {
+                    const url = "/api/GetCategoryAndSubCategories/?catName=" + categoryValue;
+                    $.get(url,
+                        function (data) {
+
+                            data.subCats.forEach(function (element) {
+
+                                const div = document.getElementById("subcat_display");
+
+                                const labelNode = document.createElement("LABEL");
+                                labelNode.setAttribute("for", element);
+                                labelNode.setAttribute("name", "SubCategories");
+                                labelNode.innerHTML = element;
+
+                                div.appendChild(labelNode);
+
+                                const inputNode = document.createElement("INPUT");
+                                inputNode.setAttribute("type", "checkbox");
+                                inputNode.setAttribute("value", element);
+                                inputNode.setAttribute("name", "SubCategories");
+                                inputNode.setAttribute("id", element);
+
+                                div.appendChild(inputNode);
+                            });
+
+                        });
+                }
+            });
+        })
+    </script>
+}

@@ -1,0 +1,28 @@
+﻿@using System.Web.UI.WebControls
+@model ECommerceApp7.ViewModels.UpdateSubcategoriesViewModel
+@{
+    ViewBag.Title = "Update Subcategory";
+}
+
+
+@using (Html.BeginForm("UpdateSubcategories", "Admin", FormMethod.Post))
+{
+    <div class="form-group container">
+        @Html.HiddenFor(model => model.SubcategoryId)
+        <div class="row">
+            <div class="col-sm-2">
+                @Html.DisplayFor(model => model.SubcategoryName)
+            </div>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(model => model.NewSubcategoryName, "", new { placeholder = "Enter New Name" })
+                @Html.ValidationMessageFor(model => model.NewSubcategoryName)
+            </div>
+            <div class="col-sm">
+                <button type="submit" id="submit" class="btn btn-outline-primary">Rename</button>
+            </div>
+        </div>
+    </div>
+}
+@Html.Partial("_BackButtonPartial")
+
+

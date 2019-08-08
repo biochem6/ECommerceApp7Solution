@@ -6,39 +6,63 @@
     ViewBag.Title = "Category";
 }
 
+@*@Html.Partial("_SortFilterPartial")*@
+
 <h2>Category</h2>
 
 <table>
-@foreach (var item in Model) {
-    
-    <tr>
-        <td>
-            <img width="275" src=@("../../Images/" + item.ImageReference) alt="" />
-        </td>
-        
-    </tr>  
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-       
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.ActionLink("Add To Cart", "Cart", "Store", new { @User = User.Identity.GetUserId(), @itemId = item.ItemId }, null)
-        </td>
-    </tr>
+    @foreach (var item in Model)
+    {
 
-}
+        <tr>
+            <td>
+                <img width="275" src=@("../../Images/" + item.ImageReference) alt="" />
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="addToCart" class="btn btn-outline-primary btn-sm" data-item-name="@item.Name" data-item-id="@item.ItemId">Add to Cart</button>
+            </td>
+        </tr>
+
+    }
 
 </table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#addToCart").click(function(e) {
+                var button = $(e.target);
+
+                var url = "/store/additemtocart/" + button.attr("data-item-id");
+                $.post(url)
+                    .done(function() {
+                        alert("The item" + button.attr("data-item-name") + " was successfully added to your cart!");
+                    })
+                    .fail(function() {
+                        console.log(post);
+                    });
+            });
+        })
+
+    </script>
+}

@@ -1,0 +1,212 @@
+﻿@using System.Activities.Statements
+@using System.Web.Mvc.Html
+@using ECommerceApp7.Models
+@model ECommerceApp7.ViewModels.UpdateItemViewModel
+
+@{
+    ViewBag.Title = "Update Item";
+    List<string> catName = new List<string>();
+    foreach (var category in Model.Categories)
+    {
+        catName.Add(category.CategoryName);
+    }
+}
+
+<h2>UpdateItem</h2>
+
+
+@using (Html.BeginForm("UpdateItem", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ItemId)
+
+        <div class="row form-group">
+            <div class="col-sm-2">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-2">
+                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-2">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="col">
+                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "min-width: 300px" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-2">
+                @Html.LabelFor(model => model.ImageReference, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImageReference, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImageReference, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-2">
+                @Html.LabelFor(model => model.CategoryName)
+            </div>
+            <div class="col-sm-2">
+                <input id="category" name="CategoryName" type="text" value="@Model.CategoryName" readonly style="border: none" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-md">
+                @Html.DropDownList("SelectNewCategory", new SelectList(catName), "Select New Category", new { @class = "form-control", @id = "SelectNewCategory" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <p id="category_selected"></p>
+            </div>
+            <div class="col-md" id="subcat">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+
+        </div>
+    </div>
+}
+
+@Html.Partial("_BackButtonPartial")
+
+@section scripts
+{
+    <script>
+        $(document).ready(() => {
+
+            $("#subcat").empty();
+
+            const categorySelected = document.getElementById("category");
+            const categoryValue = categorySelected.value;
+
+            if (categoryValue !== "") {
+                const url = "/api/GetSubCategories/?categoryName=" + categoryValue;
+                $.get(url,
+                    function (data) {
+                        //console.log(data[0]);
+                        const categoryLi = document.getElementById("category_selected");
+                        categoryLi.innerHTML = "Subcategories";
+
+                        data.forEach(function (element) {
+                            //console.log("key: ", element.key, "value: ", element.value);
+                            const node = document.createElement("INPUT"); // Create a input node
+                            node.setAttribute("type", "checkbox");
+                            node.setAttribute("name", "Subcategories");
+                            node.setAttribute("class", "check");
+                            node.setAttribute("value", element.key);
+                            node.setAttribute("id", element.value);
+
+                            const label = document.createElement("label");
+                            label.htmlFor = element.value;
+                            label.appendChild(document.createTextNode(element.value));
+
+
+                            const br = document.createElement("BR");
+
+                            document.getElementById("subcat").appendChild(node); // Append to div
+                            document.getElementById("subcat").appendChild(label);
+                            document.getElementById("subcat").appendChild(br);
+                        });
+                        checkItemSubcategory();
+                    });
+            }
+
+
+            $("#SelectNewCategory").change((e) => {
+
+                $("#subcat").empty();
+
+                const categorySelected = document.getElementById("SelectNewCategory");
+                const categoryValue = categorySelected.options[categorySelected.selectedIndex].text;
+
+                $("#category").val(categoryValue);
+
+                categorySelected.selectedIndex = 0;
+
+                if (categoryValue !== "") {
+                    const url = "/api/GetSubCategories/?categoryName=" + categoryValue;
+                    $.get(url,
+                        function (data) {
+
+                            const categoryLi = document.getElementById("category_selected");
+                            categoryLi.innerHTML = "Subcategories";
+
+                            data.forEach(function (element) {
+                                const node = document.createElement("INPUT"); // Create a input node
+                                node.setAttribute("type", "checkbox");
+                                node.setAttribute("name", "Subcategories");
+                                node.setAttribute("class", "check");
+                                node.setAttribute("value", element.key);
+                                node.setAttribute("id", element.value);
+
+                                const label = document.createElement("label");
+                                label.htmlFor = element.value;
+                                label.appendChild(document.createTextNode(element.value));
+
+
+                                const br = document.createElement("BR");
+
+                                document.getElementById("subcat").appendChild(node); // Append to div
+                                document.getElementById("subcat").appendChild(label);
+                                document.getElementById("subcat").appendChild(br);
+                            });
+
+                        });
+                    checkItemSubcategory();
+                }
+            });
+
+            function checkItemSubcategory() {
+                const itemId = $("#ItemId").val();
+                const url = "/api/GetItemSubcategory?itemId=" + itemId;
+                $.get(url,
+                    function (data) {
+                        let array = Array.prototype.slice.call(data);
+
+                        let check = Array.from(document.getElementsByClassName("check"));
+
+                        for (let i = 0; i < array.length; i++) {
+                            for (const ch of check) {
+                                //console.log(array[i], ch.id);
+                                if (array[i] === ch.id) {
+                                    ch.checked = true;
+                                }
+                            }
+                        }
+                    });
+            };
+        });
+
+
+    </script>
+}

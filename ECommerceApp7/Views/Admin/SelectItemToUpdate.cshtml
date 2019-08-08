@@ -1,0 +1,43 @@
+﻿@model ECommerceApp7.ViewModels.SelectItemToUpdateViewModel
+
+@{
+    ViewBag.Title = "SelectItemToUpdate";
+}
+
+<table>
+@foreach (var item in Model.Items)
+{
+    using (Html.BeginForm("GetUpdateItem", "Admin", new {itemId = item.ItemId}, FormMethod.Post))
+    {
+        <tr>
+            <td>
+                <img width="275" src=@("../../Images/" + item.ImageReference) alt=""/>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="editItem" class="btn btn-outline-info btn-sm" data-item-name="@item.Name" data-item-id="@item.ItemId">Edit Item</button>
+            </td>
+        </tr>
+    }
+}
+@Html.Partial("_BackButtonPartial")
+</table>
+

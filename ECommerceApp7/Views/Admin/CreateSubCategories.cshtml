@@ -1,0 +1,104 @@
+﻿@model ECommerceApp7.ViewModels.CreateSubCategoriesViewModel
+
+@{
+    ViewBag.Title = "CreateSubCategories";
+    var cat = ViewBag.categories;
+}
+
+<h2>Create Sub-Categories</h2>
+
+@using (Html.BeginForm("CreateSubCategories", "Admin"))
+{
+    <p class="alert alert-info">All fields are <strong>required</strong>.</p>
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label>Select Category</label>
+        <select name="CategoryName" class="list-group" id="category" style="width: 10rem">
+            @* First option element keeps the previously submitted category selected  *@
+            <option selected disabled hidden>@Html.DisplayFor(i => i.CategoryName)</option>
+            @foreach (var c in cat)
+            {
+                <option id="Category">@c</option>
+            }
+        </select>
+        @Html.ValidationMessageFor(m => m.CategoryName)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SubCategoryName)
+        @Html.TextBoxFor(m => m.SubCategoryName, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.SubCategoryName)
+        @Html.DisplayFor(m => m.ValidationMessage)
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+
+}
+
+<div class="category_display">
+    <p id="category_selected"></p>
+    <ul id="subcat_ul"></ul>
+</div>
+
+
+@Html.Partial("_BackButtonPartial")
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $("#subcat_ul").empty();
+
+            const categorySelected = document.getElementById("category");
+            const categoryValue = categorySelected.options[categorySelected.selectedIndex].text;
+
+            if (categoryValue !== "") {
+                const url = "/api/GetCategoryAndSubCategories/?catName=" + categoryValue;
+                $.get(url,
+                    function (data) {
+                        //console.log(data.cat[0]);
+                        const categoryLi = document.getElementById("category_selected");
+                        categoryLi.innerHTML = data.cat[0];
+
+                        data.subCats.forEach(function (element) {
+                            const node = document.createElement("LI");                 // Create a <li> node
+                            const textnode = document.createTextNode(element);         // Create a text node
+                            node.appendChild(textnode);                                // Append the text to <li>
+                            document.getElementById("subcat_ul").appendChild(node);    // Append to ul
+                        });
+
+                    });
+            }
+
+            $(document).change(function () {
+
+                $("#subcat_ul").empty();
+
+                const categorySelected = document.getElementById("category");
+                const categoryValue = categorySelected.options[categorySelected.selectedIndex].text;
+
+                if (categoryValue !== "") {
+                    const url = "/api/GetCategoryAndSubCategories/?catName=" + categoryValue;
+                    $.get(url,
+                        function (data) {
+                            //console.log(data.cat[0]);
+                            const categoryLi = document.getElementById("category_selected");
+                            categoryLi.innerHTML = data.cat[0];
+
+                            data.subCats.forEach(function (element) {
+                                const node = document.createElement("LI");                 // Create a <li> node
+                                const textnode = document.createTextNode(element);         // Create a text node
+                                node.appendChild(textnode);                                // Append the text to <li>
+                                document.getElementById("subcat_ul").appendChild(node);    // Append to ul
+                            });
+
+                        });
+                }
+            });
+        })
+    </script>
+}

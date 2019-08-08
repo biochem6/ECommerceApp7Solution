@@ -1,0 +1,54 @@
+﻿
+@model ECommerceApp7.ViewModels.SelectItemToDeleteViewModel
+
+@{
+    ViewBag.Title = "DeleteItem";
+}
+<div class="jumbotron">
+    <h2 class="admin-pages-title">Delete Item</h2>
+</div>
+@Html.Partial("_SortFilterPartial")
+
+<div class="container form-container">
+        <div class="row form-row">
+            @foreach (var item in Model.Items)
+             {
+                using (Html.BeginForm("DeleteItem", "Admin", new { itemId = @item.ItemId }, FormMethod.Post))
+                 {
+                <div class="col-sm display-column">
+                    <div class="row">
+                        <div class="col image-col">
+                            <img class="display-image" src=@("../../Images/" + item.ImageReference) alt="" />
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-8 item-name">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </div>
+                        <div class="col-sm-4 item-price">
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </div>
+                    </div>
+                    @*<div class="row">
+                        <div class="col">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </div>
+                    </div>*@
+                    <div class="row submit-button-row">
+                        <div class="col submit-col">
+                            <button type="submit" id="deleteItem" class="btn btn-danger admin-submit" data-item-name="@item.Name" data-item-id="@item.ItemId">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                }
+             
+            
+         }
+    </div>
+</div>
+       
+    <hr/>
+
+@Html.Partial("_BackButtonPartial")
+

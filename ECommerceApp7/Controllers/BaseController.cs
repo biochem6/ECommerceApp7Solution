@@ -6,11 +6,12 @@ namespace ECommerceApp7.Controllers
 {
     public class BaseController : Controller
     {
-        private readonly StoreContext _db = new StoreContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         public BaseController()
         {
-            ViewBag.categories = _db.Categories;
+
+            ViewBag.categories = _db.Categories.ToList();
 
         }
 

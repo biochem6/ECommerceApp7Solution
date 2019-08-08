@@ -1,45 +1,93 @@
-﻿@model IEnumerable<ECommerceApp7.Models.Item>
+﻿@using ECommerceApp7.Models
+@model IEnumerable<ECommerceApp7.Models.Cart>
 
 @{
-    ViewBag.Title = "Cart";
+    ViewBag.Title = "cart";
+
 }
 
 <h2>Your Shopping Cart</h2>
 
 <table class="table">
-  
-@foreach (var item in Model)
-{
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsOnSale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SalePercent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SkuNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageReference)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.ActionLink("Change Quantity", "ChangeQuantity", new { id=item.ItemId }) 
-            @Html.ActionLink("Remove", "RemoveFromCart", new { id=item.ItemId })
-        </td>
+        <th>
+            <p>Name</p>
+        </th>
+        <th>
+            <p>SKU Number</p>
+        </th>
+        <th>
+            <p>Price</p>
+        </th>
+        <th>
+            <p>Category</p>
+        </th>
+        <th>
+            <p>Date Added</p>
+        </th>
+        <th>
+            <p>Quantity</p>
+        </th>
     </tr>
-}
 
+    @{
+        if ((List<Cart>)Session["cart"] != null)
+        {
+            foreach (Cart cart in (List<Cart>)Session["cart"])
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => cart.ItemName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => cart.SkuNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => cart.Price)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => cart.CategoryName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => cart.DateAdded)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => cart.ItemQuantity)
+                    </td>
+                    <td></td>
+                </tr>
+            }
+        }
+      
+        
+        foreach (var cart in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => cart.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cart.SkuNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cart.Price)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => cart.CategoryName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => cart.DateAdded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cart.ItemQuantity)
+                </td>
+                <td></td>
+            </tr>
+        }
+        }
+    
 </table>
